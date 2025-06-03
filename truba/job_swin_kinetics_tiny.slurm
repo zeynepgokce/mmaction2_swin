@@ -19,8 +19,8 @@ module load miniconda3
 echo "NODE: $(hostname)"
 nvidia-smi
 
-wdir=/arf/home/zgokce/code/mmaction2_swin  #Uygulama için çalıştırılacak dosyaların adresleri.
-cd $wdirs
+wdir=/arf/home/zgokce/code/mmaction2_swin #Uygulama için çalıştırılacak dosyaların adresleri.
+cd $wdir
 pwd
 
 conda activate open-mmlab
