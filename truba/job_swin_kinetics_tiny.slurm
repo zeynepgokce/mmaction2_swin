@@ -23,7 +23,7 @@ wdir=/arf/home/zgokce/code/mmaction2_swin  #Uygulama için çalıştırılacak d
 cd $wdirs
 
 conda activate open-mmlab
-srun python ./tool/test.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "ckpt/swin_tiny_patch244_window877_kinetics400_1k.pth"
+srun python ./tools/test.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "ckpt/swin_tiny_patch244_window877_kinetics400_1k.pth"
 
 
 exit

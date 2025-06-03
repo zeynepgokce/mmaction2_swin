@@ -10,11 +10,11 @@ model = dict(
 
 # dataset settings
 dataset_type = 'VideoDataset'
-data_root = '../data/kinetics400_tiny/train'
-data_root_val = '../data/kinetics400_tiny/val'
-ann_file_train = '../data/kinetics400_tiny/kinetics_tiny_train_video.txt'
-ann_file_val = '../data/kinetics400_tiny/kinetics_tiny_val_video.txt'
-ann_file_test = '../data/kinetics400_tiny/kinetics_tiny_val_video.txt'
+data_root = 'data/kinetics400_tiny/train'
+data_root_val = 'data/kinetics400_tiny/val'
+ann_file_train = 'data/kinetics400_tiny/kinetics_tiny_train_video.txt'
+ann_file_val = 'data/kinetics400_tiny/kinetics_tiny_val_video.txt'
+ann_file_test = 'data/kinetics400_tiny/kinetics_tiny_val_video.txt'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
