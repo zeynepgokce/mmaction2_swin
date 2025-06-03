@@ -17,7 +17,7 @@ from mmengine.model.weight_init import trunc_normal_
 from mmengine.runner.checkpoint import _load_checkpoint
 
 from mmaction.registry import MODELS
-
+torch.cuda.empty_cache()
 
 def window_partition(x: torch.Tensor,
                      window_size: Sequence[int]) -> torch.Tensor:
@@ -226,9 +226,11 @@ class WindowAttention3D(BaseModule):
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads,
                                   C // self.num_heads).permute(2, 0, 3, 1, 4)
         q, k, v = qkv[0], qkv[1], qkv[2]  # B_, nH, N, C
+        del qkv
 
         q = q * self.scale
         attn = q @ k.transpose(-2, -1)
+        del q, k
 
         relative_position_bias = self.relative_position_bias_table[
             self.relative_position_index[:N, :N].reshape(-1)].reshape(
@@ -248,7 +250,10 @@ class WindowAttention3D(BaseModule):
 
         attn = self.attn_drop(attn)
 
+
         x = (attn @ v).transpose(1, 2).reshape(B_, N, C)
+        del attn, v
+
         x = self.proj(x)
         x = self.proj_drop(x)
         return x

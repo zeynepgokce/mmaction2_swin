@@ -86,11 +86,11 @@ class RawframeDataset(BaseActionDataset):
                  ann_file: str,
                  pipeline: List[Union[ConfigType, Callable]],
                  data_prefix: ConfigType = dict(img=''),
-                 filename_tmpl: str = 'img_{:05}.jpg',
+                 filename_tmpl: str = 'img_{:05}.bmp',
                  with_offset: bool = False,
                  multi_class: bool = False,
                  num_classes: Optional[int] = None,
-                 start_index: int = 1,
+                 start_index: int = 0,
                  modality: str = 'RGB',
                  test_mode: bool = False,
                  **kwargs) -> None:
