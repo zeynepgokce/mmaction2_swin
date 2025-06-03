@@ -21,10 +21,10 @@ nvidia-smi
 
 wdir=/arf/home/zgokce/code/mmaction2_swin #Uygulama için çalıştırılacak dosyaların adresleri.
 cd $wdir
-pwd
+
+export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-
 srun python ./tools/test.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "ckpt/swin_tiny_patch244_window877_kinetics400_1k.pth"
 
 
