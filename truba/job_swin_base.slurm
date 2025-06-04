@@ -25,7 +25,7 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-srun python ./tools/test.py "./configs/recognition/swin/finetune_ASL_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options load_from="ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth" train_dataloader.batch_size=16 val_dataloader.batch_size=16
+srun python ./tools/train.py "./configs/recognition/swin/finetune_ASL_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/small/" load_from="ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth" train_dataloader.batch_size=16 val_dataloader.batch_size=16
 
 
 exit
