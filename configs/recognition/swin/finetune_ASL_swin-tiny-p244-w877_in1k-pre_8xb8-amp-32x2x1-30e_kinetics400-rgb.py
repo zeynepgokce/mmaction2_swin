@@ -4,15 +4,13 @@ _base_ = [
 
 model = dict(
     backbone=dict(
-        arch='large',
-        drop_path_rate=0.4,
         pretrained=  # noqa: E251
-        'https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_large_patch4_window7_224_22k.pth'  # noqa: E501
-    ),
-    cls_head=dict(in_channels=1536, num_classes=250))
+        'https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_tiny_patch4_window7_224.pth'  # noqa: E501
+    )  ,
+    cls_head=dict(num_classes=250)
+)
 
-
-# dataset settings
+#dataset settings
 dataset_type = 'RawframeDataset'
 dataset_root ="/arf/home/zgokce/code/videomae_v2/data"
 data_root = dataset_root +'/ASL-Text_64x64_640x480_PIL/train'
@@ -61,8 +59,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=8,
-    num_workers=8,
+    batch_size=2,
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
@@ -71,8 +69,8 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=8,
-    num_workers=8,
+    batch_size=2,
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -83,7 +81,7 @@ val_dataloader = dict(
         test_mode=True))
 test_dataloader = dict(
     batch_size=1,
-    num_workers=8,
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -104,7 +102,7 @@ test_cfg = dict(type='TestLoop')
 optim_wrapper = dict(
     type='AmpOptimWrapper',
     optimizer=dict(
-        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.05),
+        type='AdamW', lr=1e-4, betas=(0.9, 0.999), weight_decay=0.02),
     constructor='SwinOptimWrapperConstructor',
     paramwise_cfg=dict(
         absolute_pos_embed=dict(decay_mult=0.),
