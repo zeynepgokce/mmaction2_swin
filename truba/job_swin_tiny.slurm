@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda                 # GPU içeren uygun kuyruk
 #SBATCH -A zgokce                   # Kullanıcı adı
-#SBATCH -J swin_1gpu        # İşin adı
+#SBATCH -J swin_tiny_1gpu        # İşin adı
 #SBATCH --gres=gpu:1                # Tek node'da 1 GPU
 #SBATCH --nodes 1                        # Tek node
 #SBATCH --ntasks 1
@@ -25,7 +25,9 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-srun python ./tools/test.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "ckpt/swin_tiny_patch244_window877_kinetics400_1k.pth"
 
+srun python ./tools/train.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/tiny/" dataset_root="/arf/home/zgokce/code/videomae_v2/data" train_dataloader.batch_size=4 val_dataloader.batch_size=4
+
+srun python ./tools/test.py "./configs/recognition/swin/swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py" "/arf/scratch/zgokce/workdir/swin/tiny/epoch_45.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/tiny/" dataset_root="/arf/home/zgokce/code/videomae_v2/data"  --dump /arf/scratch/zgokce/workdir/swin/tiny/result.pkl
 
 exit

@@ -4,13 +4,14 @@ _base_ = [
 
 model = dict(
     backbone=dict(
-        arch='small',
-        drop_path_rate=0.2,
+        arch='large',
+        drop_path_rate=0.4,
         pretrained=  # noqa: E251
-        'https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_small_patch4_window7_224.pth'  # noqa: E501
+        'https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_large_patch4_window7_224_22k.pth'  # noqa: E501
     ),
-    cls_head=dict(num_classes=250)
-)
+    cls_head=dict(in_channels=1536, num_classes=250))
+
+
 # dataset settings
 dataset_type = 'RawframeDataset'
 dataset_root="/home/zeynep/Thesis/code/videomae_v2/data"
@@ -60,8 +61,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=2,
-    num_workers=2,
+    batch_size=8,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
@@ -70,8 +71,8 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=2,
-    num_workers=2,
+    batch_size=8,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -82,7 +83,7 @@ val_dataloader = dict(
         test_mode=True))
 test_dataloader = dict(
     batch_size=1,
-    num_workers=2,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -103,7 +104,7 @@ test_cfg = dict(type='TestLoop')
 optim_wrapper = dict(
     type='AmpOptimWrapper',
     optimizer=dict(
-        type='AdamW', lr=1e-4, betas=(0.9, 0.999), weight_decay=0.02),
+        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.05),
     constructor='SwinOptimWrapperConstructor',
     paramwise_cfg=dict(
         absolute_pos_embed=dict(decay_mult=0.),
@@ -136,4 +137,3 @@ default_hooks = dict(
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (8 samples per GPU).
 auto_scale_lr = dict(enable=False, base_batch_size=64)
-load_from = "/home/zeynep/Thesis/code/mmaction2/ckpt/swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-e91ab986.pth"

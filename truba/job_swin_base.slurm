@@ -27,4 +27,6 @@ export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site
 conda activate open-mmlab
 srun python ./tools/train.py "./configs/recognition/swin/finetune_ASL_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/base/" dataset_root="/arf/home/zgokce/code/videomae_v2/data" load_from="ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth" train_dataloader.batch_size=4 val_dataloader.batch_size=4
 
+srun python ./tools/test.py "./configs/recognition/swin/finetune_ASL_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py" "/arf/scratch/zgokce/workdir/swin/base/epoch_45.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/base/" dataset_root="/arf/home/zgokce/code/videomae_v2/data"  --dump /arf/scratch/zgokce/workdir/swin/base/result.pkl
+
 exit
