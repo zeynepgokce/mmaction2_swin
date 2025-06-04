@@ -13,7 +13,7 @@ model = dict(
 )
 # dataset settings
 dataset_type = 'RawframeDataset'
-dataset_root ="/home/zeynep/Thesis/code/videomae_v2/data"
+dataset_root ="/arf/home/zgokce/code/videomae_v2/data"
 data_root = dataset_root +'/ASL-Text_64x64_640x480_PIL/train'
 data_root_val = dataset_root +'/ASL-Text_64x64_640x480_PIL/val'
 data_root_test = dataset_root +'/ASL-Text_64x64_640x480_PIL/test'
