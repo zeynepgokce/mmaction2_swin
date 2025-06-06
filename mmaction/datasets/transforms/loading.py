@@ -15,7 +15,7 @@ from mmengine.fileio import FileClient
 from mmaction.registry import TRANSFORMS
 from mmaction.utils import get_random_string, get_shm_dir, get_thread_id
 
-
+import cv2
 @TRANSFORMS.register_module()
 class LoadRGBFromFile(BaseTransform):
     """Load a RGB image from file.
@@ -1427,6 +1427,12 @@ class RawFrameDecode(BaseTransform):
             frame_idx += offset
             if modality == 'RGB':
                 filepath = osp.join(directory, filename_tmpl.format(frame_idx))
+                try:
+                    img = cv2.imread(str(filepath))
+                    if img is None:
+                        print(f"Bozuk veya okunamayan dosya: {filepath}")
+                except Exception as e:
+                    print(f"Hata oluştu: {filepath} -> {e}")
 
                 img_bytes = self.file_client.get(filepath)
                 # Get frame with channel order RGB directly.
