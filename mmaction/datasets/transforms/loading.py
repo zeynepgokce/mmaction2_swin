@@ -1403,6 +1403,7 @@ class RawFrameDecode(BaseTransform):
         directory = results['frame_dir']
         filename_tmpl = results['filename_tmpl']
         modality = results['modality']
+        print("directory:", directory)
 
         if self.file_client is None:
             self.file_client = FileClient(self.io_backend, **self.kwargs)
@@ -1426,7 +1427,7 @@ class RawFrameDecode(BaseTransform):
             frame_idx += offset
             if modality == 'RGB':
                 filepath = osp.join(directory, filename_tmpl.format(frame_idx))
-                print(filepath)
+
                 img_bytes = self.file_client.get(filepath)
                 # Get frame with channel order RGB directly.
                 cur_frame = mmcv.imfrombytes(img_bytes, channel_order='rgb')
@@ -1460,6 +1461,8 @@ class RawFrameDecode(BaseTransform):
                 proposals = (proposals * scale_factor).astype(np.float32)
                 results['proposals'] = proposals
 
+
+        print("end")
         return results
 
     def __repr__(self):
