@@ -1403,7 +1403,7 @@ class RawFrameDecode(BaseTransform):
         directory = results['frame_dir']
         filename_tmpl = results['filename_tmpl']
         modality = results['modality']
-        print("directory:", directory)
+        #print("directory:", directory)
 
         if self.file_client is None:
             self.file_client = FileClient(self.io_backend, **self.kwargs)
@@ -1468,7 +1468,7 @@ class RawFrameDecode(BaseTransform):
                 results['proposals'] = proposals
 
 
-        print("end")
+        #print("end")
         return results
 
     def __repr__(self):
