@@ -2,11 +2,11 @@
 #SBATCH -p akya-cuda
 #SBATCH -A zgokce
 #SBATCH -J swin_large_multigpu
-#SBATCH --gres=gpu:1              # Tek node'da 1 GPU
+#SBATCH --gres=gpu:2                # Tek node'da 1 GPU
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=03-00:00
 #SBATCH --output=logs/slurm-%x-%j-%t.out
 #SBATCH --error=logs/slurm-%x-%j-%t.err
@@ -18,9 +18,8 @@ module purge
 module load lib/cuda/11.8
 module load miniconda3
 
-#export MASTER_PORT=$((12000 + $RANDOM % 20000))
-#export MASTER_ADDR=$(srun --ntasks=1 hostname 2>&1 | tail -n1)
-
+export MASTER_PORT=$((12000 + $RANDOM % 20000))
+export MASTER_ADDR=$(srun --ntasks=1 hostname 2>&1 | tail -n1)
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 echo "NODE: $(hostname)"
