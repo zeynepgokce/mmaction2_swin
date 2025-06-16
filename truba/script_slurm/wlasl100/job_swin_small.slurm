@@ -25,7 +25,7 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/swin/small/"  dataset_root="/arf/home/zgokce/code/videomae_v2/data"  load_from="./ckpt/swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-e91ab986.pth" train_dataloader.batch_size=4 val_dataloader.batch_size=4
+srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/swin/small/"  dataset_root="/arf/home/zgokce/code/videomae_v2/data"  load_from="/arf/scratch/zgokce/swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-e91ab986.pth" train_dataloader.batch_size=4 val_dataloader.batch_size=4
 
 srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "/arf/scratch/zgokce/workdir/WLASL100/swin/small/epoch_45.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/swin/small/"  dataset_root="/arf/home/zgokce/code/videomae_v2/data"  --dump /arf/scratch/zgokce/workdir/WLASL100/swin/small/result.pkl
 

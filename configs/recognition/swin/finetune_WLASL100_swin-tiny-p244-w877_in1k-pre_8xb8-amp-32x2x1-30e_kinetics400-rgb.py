@@ -10,7 +10,8 @@ model = dict(
     cls_head=dict(num_classes=100)
 )
 
-#dataset settingsdataset_type = 'RawframeDataset'
+#dataset settings
+dataset_type = 'RawframeDataset'
 dataset_root ="/arf/home/zgokce/code/videomae_v2/data"
 data_root = dataset_root +'/wlasl100_64x64_640x480_PIL/train'
 data_root_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val'
