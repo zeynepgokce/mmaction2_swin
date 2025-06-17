@@ -25,7 +25,7 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-srun python ./tools/train.py "configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/uniformerv2/base/" dataset_root="/arf/home/zgokce/code/videomae_v2/data" train_dataloader.batch_size=4 val_dataloader.batch_size=4
+srun python ./tools/train.py "configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/uniformerv2/base/" dataset_root="/arf/home/zgokce/code/videomae_v2/data" train_dataloader.batch_size=4 val_dataloader.batch_size=4 train_dataloader.num_workers=16 val_dataloader.num_workers=8
 
 srun python ./tools/test.py "configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb_test.py"  "/arf/scratch/zgokce/workdir/WLASL100/uniformerv2/base/epoch_45.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/WLASL100/uniformerv2/base/" dataset_root="/arf/home/zgokce/code/videomae_v2/data"  --dump /arf/scratch/zgokce/workdir/WLASL100/uniformerv2/base/result.pkl
 
