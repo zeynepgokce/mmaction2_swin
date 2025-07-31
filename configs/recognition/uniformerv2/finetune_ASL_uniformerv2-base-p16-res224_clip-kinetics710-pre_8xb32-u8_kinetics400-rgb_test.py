@@ -52,14 +52,14 @@ model = dict(
 
 # dataset settings
 dataset_type = 'RawframeDataset'
-dataset_root ="/arf/home/zgokce/code/videomae_v2/data"
-#dataset_root="/home/zeynep/Thesis/code/videomae_v2/data"
-data_root = dataset_root +'/ASL-Text_64x64_640x480_PIL/train'
-data_root_val = dataset_root +'/ASL-Text_64x64_640x480_PIL/val'
-data_root_test = dataset_root +'/ASL-Text_64x64_640x480_PIL/test'
-ann_file_train = dataset_root +'/ASL-Text_64x64_640x480_PIL/train_mm2.txt'
-ann_file_val = dataset_root +'/ASL-Text_64x64_640x480_PIL/val_mm2.txt'
-ann_file_test = dataset_root +'/ASL-Text_64x64_640x480_PIL/test_mm2.txt'
+dataset_root ="/arf/scratch/zgokce/data"
+data_root = dataset_root +'/wlasl100_64x64_640x480_PIL/train'
+data_root_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val'
+data_root_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test'
+ann_file_train = dataset_root +'/wlasl100_64x64_640x480_PIL/train_mm2.txt'
+ann_file_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val_mm2.txt'
+ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
+
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
