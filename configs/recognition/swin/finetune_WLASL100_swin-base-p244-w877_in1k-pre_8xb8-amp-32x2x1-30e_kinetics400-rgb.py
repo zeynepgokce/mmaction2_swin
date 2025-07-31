@@ -13,7 +13,7 @@ model = dict(
 )
 # dataset settings
 dataset_type = 'RawframeDataset'
-dataset_root ="/arf/home/zgokce/code/videomae_v2/data"
+dataset_root ="/arf/scratch/zgokce/data"
 data_root = dataset_root +'/wlasl100_64x64_640x480_PIL/train'
 data_root_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val'
 data_root_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test'
@@ -136,3 +136,4 @@ default_hooks = dict(
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (8 samples per GPU).
 auto_scale_lr = dict(enable=False, base_batch_size=64)
+load_from = "/home/zeynep/Thesis/code/mmaction2/ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth"
