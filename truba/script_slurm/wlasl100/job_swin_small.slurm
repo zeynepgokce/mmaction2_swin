@@ -25,9 +25,9 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-#srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/small/"  dataset_root="/arf/scratch/zgokce/data"  load_from="./ckpt/swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-e91ab986.pth" train_dataloader.batch_size=4 val_dataloader.batch_size=4 train_dataloader.num_workers=4 val_dataloader.num_workers=4
+#srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/small/"  dataset_root="/arf/scratch/zgokce/data"  load_from="./ckpt/swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-e91ab986.pth"
 
-srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "/arf/scratch/zgokce/workdir/swin/WLASL100/small/epoch_45.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/small/"  dataset_root="/arf/scratch/zgokce/data"  --dump /arf/scratch/zgokce/workdir/swin/WLASL100/small/result.pkl
+srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  "/arf/scratch/zgokce/workdir/swin/WLASL100/small/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/small/"  dataset_root="/arf/scratch/zgokce/data"  --dump /arf/scratch/zgokce/workdir/swin/WLASL100/small/result.pkl
 
 
 exit

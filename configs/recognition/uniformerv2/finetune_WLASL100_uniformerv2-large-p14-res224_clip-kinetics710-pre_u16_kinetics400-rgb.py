@@ -51,7 +51,7 @@ ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
 test_pipeline = [
     dict(type='RawFrameDecode'),
     dict(
-        type='UniformSample', clip_len=num_frames, num_clips=1,
+        type='UniformSample', clip_len=num_frames, num_clips=4,
         test_mode=True),
     dict(type='Resize', scale=(-1, 224)),
     dict(type='ThreeCrop', crop_size=224),
@@ -61,7 +61,7 @@ test_pipeline = [
 
 test_dataloader = dict(
     batch_size=16,
-    num_workers=8,
+    num_workers=1,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
