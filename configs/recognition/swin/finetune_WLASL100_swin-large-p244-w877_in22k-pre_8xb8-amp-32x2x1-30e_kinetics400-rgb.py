@@ -25,7 +25,7 @@ ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
-    dict(type='SampleFrames', clip_len=16, frame_interval=1, num_clips=1),
+    dict(type='SampleFrames', clip_len=16, frame_interval=2, num_clips=1),
     dict(type='RawFrameDecode'),
     dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
@@ -38,7 +38,7 @@ val_pipeline = [
     dict(
         type='SampleFrames',
         clip_len=16,
-        frame_interval=1,
+        frame_interval=2,
         num_clips=1,
         test_mode=True),
     dict(type='RawFrameDecode'),
@@ -51,7 +51,7 @@ test_pipeline = [
     dict(
         type='SampleFrames',
         clip_len=16,
-        frame_interval=1,
+        frame_interval=2,
         num_clips=4,
         test_mode=True),
     dict(type='RawFrameDecode'),
@@ -62,7 +62,7 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=4,
+    batch_size=8,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -72,7 +72,7 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=4,
+    batch_size=8,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
@@ -98,7 +98,7 @@ val_evaluator = dict(type='AccMetric')
 test_evaluator = val_evaluator
 
 train_cfg = dict(
-    type='EpochBasedTrainLoop', max_epochs=45, val_begin=1, val_interval=3)
+    type='EpochBasedTrainLoop', max_epochs=30, val_begin=1, val_interval=3)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 

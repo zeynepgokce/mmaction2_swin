@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # model settings
-num_frames = 8
+num_frames = 16
 model = dict(
     type='Recognizer3D',
     backbone=dict(

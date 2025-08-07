@@ -24,7 +24,7 @@ ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
-    dict(type='SampleFrames', clip_len=16, frame_interval=1, num_clips=1),
+    dict(type='SampleFrames', clip_len=16, frame_interval=2, num_clips=1),
     dict(type='RawFrameDecode'),
     dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
@@ -37,7 +37,7 @@ val_pipeline = [
     dict(
         type='SampleFrames',
         clip_len=16,
-        frame_interval=1,
+        frame_interval=2,
         num_clips=1,
         test_mode=True),
     dict(type='RawFrameDecode'),
@@ -50,7 +50,7 @@ test_pipeline = [
     dict(
         type='SampleFrames',
         clip_len=16,
-        frame_interval=1,
+        frame_interval=2,
         num_clips=4,
         test_mode=True),
     dict(type='RawFrameDecode'),
@@ -61,8 +61,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=2,
-    num_workers=2,
+    batch_size=8,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
@@ -71,8 +71,8 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=2,
-    num_workers=2,
+    batch_size=8,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -83,7 +83,7 @@ val_dataloader = dict(
         test_mode=True))
 test_dataloader = dict(
     batch_size=1,
-    num_workers=2,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -104,7 +104,7 @@ test_cfg = dict(type='TestLoop')
 optim_wrapper = dict(
     type='AmpOptimWrapper',
     optimizer=dict(
-        type='AdamW', lr=1e-4, betas=(0.9, 0.999), weight_decay=0.02),
+        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.02),
     constructor='SwinOptimWrapperConstructor',
     paramwise_cfg=dict(
         absolute_pos_embed=dict(decay_mult=0.),

@@ -49,11 +49,10 @@ ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
 
 
 test_pipeline = [
-    dict(type='DecordInit'),
+    dict(type='RawFrameDecode'),
     dict(
-        type='UniformSample', clip_len=num_frames, num_clips=4,
+        type='UniformSample', clip_len=num_frames, num_clips=1,
         test_mode=True),
-    dict(type='DecordDecode'),
     dict(type='Resize', scale=(-1, 224)),
     dict(type='ThreeCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
@@ -68,7 +67,7 @@ test_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         ann_file=ann_file_test,
-        data_prefix=dict(video=data_root_val),
+        data_prefix=dict(video=data_root_test),
         pipeline=test_pipeline,
         test_mode=True,
         delimiter=','))
