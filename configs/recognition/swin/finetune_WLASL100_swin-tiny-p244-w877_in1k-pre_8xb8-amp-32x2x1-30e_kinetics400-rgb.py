@@ -60,7 +60,7 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=8,
+    batch_size=4,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -70,7 +70,7 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=8,
+    batch_size=4,
     num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
