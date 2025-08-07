@@ -60,7 +60,7 @@ test_pipeline = [
 ]
 
 test_dataloader = dict(
-    batch_size=16,
+    batch_size=8,
     num_workers=1,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
