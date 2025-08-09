@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -p barbun-cuda
+#SBATCH -p akya-cuda
 #SBATCH -A zgokce
 #SBATCH -J swin_base_wlasl_2gpu
 #SBATCH --gres=gpu:2               # Tek node'da 2 GPU
