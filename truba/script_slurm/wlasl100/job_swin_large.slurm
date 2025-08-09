@@ -2,11 +2,11 @@
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
 #SBATCH -J swin_large_wlasl
-#SBATCH --gres=gpu:1              # Tek node'da 1 GPU
+#SBATCH --gres=gpu:1                # Tek node'da 1 GPU
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=03-00:00
 #SBATCH --output=logs/slurm-%x-%j-%t.out
 #SBATCH --error=logs/slurm-%x-%j-%t.err
