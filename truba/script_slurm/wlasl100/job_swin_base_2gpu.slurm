@@ -40,8 +40,8 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-deepspeed python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/base/" dataset_root="/arf/scratch/zgokce/data" load_from="ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth"  train_dataloader.batch_size=8 val_dataloader.batch_size=8 train_dataloader.num_workers=16 val_dataloader.num_workers=8
+srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/base/" dataset_root="/arf/scratch/zgokce/data" load_from="ckpt/swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-182ec6cc.pth"  train_dataloader.batch_size=8 val_dataloader.batch_size=8 train_dataloader.num_workers=16 val_dataloader.num_workers=8
 
-deepspeed python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py" "/arf/scratch/zgokce/workdir/swin/WLASL100/base/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/base/" dataset_root="/arf/scratch/zgokce/data"  test_dataloader.num_workers=4 --dump /arf/scratch/zgokce/workdir/swin/WLASL100/base/result.pkl
+srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py" "/arf/scratch/zgokce/workdir/swin/WLASL100/base/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/base/" dataset_root="/arf/scratch/zgokce/data"  test_dataloader.num_workers=4 --dump /arf/scratch/zgokce/workdir/swin/WLASL100/base/result.pkl
 
 exit
