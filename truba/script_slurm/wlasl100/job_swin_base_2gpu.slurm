@@ -4,9 +4,8 @@
 #SBATCH -J swin_base_wlasl_2gpu
 #SBATCH --gres=gpu:2               # Tek node'da 2 GPU
 #SBATCH --nodes 1
-#SBATCH --ntasks 2
 #SBATCH --ntasks-per-node=2
-#SBATCH --cpus-per-task=20
+#SBATCH --cpus-per-task=10
 #SBATCH --time=03-00:00
 #SBATCH --output=logs/slurm-%x-%j-%t.out
 #SBATCH --error=logs/slurm-%x-%j-%t.err
