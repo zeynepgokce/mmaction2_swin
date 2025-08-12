@@ -6,6 +6,7 @@ model = dict(
     type='Recognizer3D',
     backbone=dict(
         type='UniFormerV2',
+        pretrained='ViT-L/14',
         input_resolution=224,
         patch_size=14,
         width=1024,
