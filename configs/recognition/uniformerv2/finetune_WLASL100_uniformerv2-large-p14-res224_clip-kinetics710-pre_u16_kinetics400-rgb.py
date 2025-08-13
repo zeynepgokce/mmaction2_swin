@@ -90,7 +90,7 @@ test_pipeline = [
 
 
 train_dataloader = dict(
-    batch_size=4,
+    batch_size=2,
     num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -100,7 +100,7 @@ train_dataloader = dict(
         data_prefix=dict(img=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=4,
+    batch_size=2,
     num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
@@ -161,6 +161,6 @@ default_hooks = dict(
 #   - `enable` means enable scaling LR automatically
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (8 samples per GPU).
-auto_scale_lr = dict(enable=False, base_batch_size=4)
+auto_scale_lr = dict(enable=False, base_batch_size=2)
 
 load_from="./ckpt/uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb_20221219-6dc86d05.pth"
