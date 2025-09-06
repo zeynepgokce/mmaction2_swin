@@ -32,8 +32,9 @@ dataset_root="/arf/scratch/zgokce/data"
 work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/tiny$hr"
 ckpt_path=$work_dir"/epoch_30.pth"
 dump=work_dir"/result.pkl"
+config="./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb$hr.py"
 
-srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"  --cfg-options work_dir=$work_dir dataset_root=$dataset_root
-srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py" $ckpt_path --cfg-options work_dir=$work_dir  dataset_root=$dataset_root --dump $dump
+srun python ./tools/train.py $config --cfg-options work_dir=$work_dir dataset_root=$dataset_root
+srun python ./tools/test.py $config $ckpt_path --cfg-options work_dir=$work_dir  dataset_root=$dataset_root --dump $dump
 
 exit
