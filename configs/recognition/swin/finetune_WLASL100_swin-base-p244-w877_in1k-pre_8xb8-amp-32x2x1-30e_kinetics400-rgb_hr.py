@@ -17,7 +17,7 @@ dataset_root ="/arf/scratch/zgokce/data"
 data_root = dataset_root +'/wlasl100_frames/train'
 data_root_val = dataset_root +'/wlasl100_frames/val'
 data_root_test = dataset_root +'/wlasl100_frames/test'
-ann_file_train = dataset_root +'/wlasl100_frames/train.txt'
+ann_file_train = dataset_root +'/wlasl100_frames/train_mm2.txt'
 ann_file_val = dataset_root +'/wlasl100_frames/val_mm2.txt'
 ann_file_test = dataset_root +'/wlasl100_frames/test_mm2.txt'
 
