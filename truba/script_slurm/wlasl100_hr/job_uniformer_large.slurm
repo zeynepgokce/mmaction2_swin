@@ -25,7 +25,22 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 
 conda activate open-mmlab
-srun python ./tools/train.py "configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb_hr.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/uniformerv2/WLASL100/large/" dataset_root="/arf/scratch/zgokce/data"
-srun python ./tools/test.py "configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb_hr.py"  "/arf/scratch/zgokce/workdir/uniformerv2/WLASL100/large/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/uniformerv2/WLASL100/large/" dataset_root="/arf/scratch/zgokce/data"  --dump /arf/scratch/zgokce/workdir/uniformerv2/WLASL100/large/result.pkl
 
+
+# variables
+hr="_hr"
+dataset_root="/arf/scratch/zgokce/data"
+exp_name="large${hr}"
+work_dir="/arf/scratch/zgokce/workdir/uniformerv2/WLASL100/${exp_name}"
+ckpt_path="${work_dir}/epoch_30.pth"
+dump="${work_dir}/result.pkl"
+config="./configs/recognition/uniformerv2/finetune_WLASL100_uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb${hr}.py"
+
+
+srun python ./tools/train.py "$config" \
+  --cfg-options work_dir="$work_dir" dataset_root="$dataset_root"
+
+srun python ./tools/test.py "$config" "$ckpt_path" \
+  --cfg-options work_dir="$work_dir" dataset_root="$dataset_root" \
+  --dump "$dump"
 exit

@@ -31,10 +31,23 @@ wdir=/arf/home/zgokce/code/mmaction2_swin
 cd $wdir
 conda activate open-mmlab
 
-#train test scripts run
 
-srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"  --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/large/" dataset_root="/arf/scratch/zgokce/data" load_from="/arf/scratch/zgokce/swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-78ad8b11.pth"
 
-srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py" "/arf/scratch/zgokce/workdir/swin/WLASL100/large/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/large/" dataset_root="/arf/scratch/zgokce/data"  --dump /arf/scratch/zgokce/workdir/swin/WLASL100/large/result.pkl
+# variables
+hr="_hr"
+dataset_root="/arf/scratch/zgokce/data"
+exp_name="large${hr}"
+work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/${exp_name}"
+ckpt_path="${work_dir}/epoch_30.pth"
+dump="${work_dir}/result.pkl"
+config="./configs/recognition/swin/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb${hr}.py"
+load_from="/arf/scratch/zgokce/swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_20220930-78ad8b11.pth"
 
+
+srun python ./tools/train.py "$config" load_from="$load_from" \
+  --cfg-options work_dir="$work_dir" dataset_root="$dataset_root"
+
+srun python ./tools/test.py "$config" "$ckpt_path" \
+  --cfg-options work_dir="$work_dir" dataset_root="$dataset_root" \
+  --dump "$dump"
 exit
