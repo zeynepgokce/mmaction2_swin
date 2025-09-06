@@ -30,9 +30,10 @@ conda activate open-mmlab
 hr="_hr"
 dataset_root="/arf/scratch/zgokce/data"
 work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/tiny$hr"
+ckpt_path=$work_dir"/epoch_30.pth"
+dump=work_dir"/result.pkl"
 
 srun python ./tools/train.py "./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"  --cfg-options work_dir=$work_dir dataset_root=$dataset_root
-
-srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py" "/arf/scratch/zgokce/workdir/swin/WLASL100/tiny/epoch_30.pth" --cfg-options work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/tiny/" dataset_root="/arf/scratch/zgokce/data"  --dump $workdir/result.pkl
+srun python ./tools/test.py "./configs/recognition/swin/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py" $ckpt_path --cfg-options work_dir=$work_dir  dataset_root=$dataset_root --dump $dump
 
 exit
