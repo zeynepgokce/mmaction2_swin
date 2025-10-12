@@ -33,7 +33,7 @@ exp_name="small${res}"
 work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/${exp_name}"
 ckpt_path="${work_dir}/epoch_30.pth"
 dump="${work_dir}/result.pkl"
-config="./configs/SLR/WLASL100_256x256/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"
+config="./configs/SLR/WLASL100_256x256/swin/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"
 
 
 #train
