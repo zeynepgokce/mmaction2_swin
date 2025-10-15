@@ -80,7 +80,7 @@ case "$SLURM_ARRAY_TASK_ID" in
     echo "Geçersiz array index: $SLURM_ARRAY_TASK_ID"; exit 1 ;;
 esac
 
-RUN_DIR="$work_dir/${config}_${CASE_TAG}_job${SLURM_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+RUN_DIR="$work_dir/${CASE_TAG}_job${SLURM_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
 mkdir -p "$RUN_DIR"
 
 
@@ -93,10 +93,10 @@ echo "==> WORK DIR   : $RUN_DIR"
 
 #train
 srun python ./tools/train.py "$config" \
-  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" 2>&1 | tee -a "$RUN_DIR/train.log"
+  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS 2>&1 | tee -a "$RUN_DIR/train.log"
 #test
 srun python ./tools/test.py "$config" "$ckpt_path" \
-  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" \
+  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS \
   --dump "$dump"
 
 exit
