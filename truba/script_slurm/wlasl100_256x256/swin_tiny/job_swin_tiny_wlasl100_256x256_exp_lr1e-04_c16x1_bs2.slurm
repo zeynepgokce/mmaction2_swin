@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J swin_tiny_base_wlasl100_256x256
+#SBATCH -J swin_tiny_wlasl100_256x256_exp_lr1e-04_c16x1_bs2
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --time=00-15:00
-#SBATCH --output=logs/slurm-%x-%j-%t.out  # %x=job name, %j=job ID, %t=task ID
-#SBATCH --error=logs/slurm-%x-%j-%t.err
+#SBATCH --time=02-00:00
+#SBATCH --output=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.out  # %x=job name, %j=job ID, %t=task ID
+#SBATCH --error=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.err
 
 source /etc/profile.d/modules.sh
 module purge
@@ -34,10 +34,10 @@ res="256"
 model_name="swin"
 model_type="tiny"
 dataset="WLASL100"
-EXP_NAME="base"
+EXP_NAME="exp_lr1e-04_c16x1_bs2"
 CONFIG="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
-CFG_OPTS="train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2  val_pipeline.0.clip_len=32   val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32  test_pipeline.0.frame_interval=1"
+CFG_OPTS="optim_wrapper.optimizer.lr=0.0001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
 dump="${$RUN_DIR}/result.pkl"
 
 echo "==> CONFIG     : $CONFIG"

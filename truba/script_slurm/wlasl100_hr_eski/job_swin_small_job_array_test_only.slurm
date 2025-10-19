@@ -91,8 +91,6 @@ config="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-small-p244-w8
 
 #test
 
-#find best checkpoint path in the workdir
-ckpt_path="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
 
 srun python ./tools/test.py "$config" "$ckpt_path" \
   --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS \
