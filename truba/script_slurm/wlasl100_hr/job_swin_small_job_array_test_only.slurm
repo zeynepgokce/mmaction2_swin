@@ -45,30 +45,34 @@ case "$SLURM_ARRAY_TASK_ID" in
   0)
     CASE_TAG="base"
     CFG_OPTS=""  # override yok
+    RUN_DIR="$work_dir/${CASE_TAG}_job3019268_${SLURM_ARRAY_TASK_ID}"
     ;;
   1)
     CASE_TAG="t16x1"
     CFG_OPTS="train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 \
       val_pipeline.0.clip_len=16   val_pipeline.0.frame_interval=1 \
       test_pipeline.0.clip_len=16  test_pipeline.0.frame_interval=1"
+    RUN_DIR="$work_dir/${CASE_TAG}_job3019273_${SLURM_ARRAY_TASK_ID}"
     ;;
   2)
     CASE_TAG="t24x1"
     CFG_OPTS="train_pipeline.0.clip_len=24 train_pipeline.0.frame_interval=1 \
       val_pipeline.0.clip_len=24   val_pipeline.0.frame_interval=1 \
       test_pipeline.0.clip_len=24  test_pipeline.0.frame_interval=1"
+    RUN_DIR="$work_dir/${CASE_TAG}_job3019374_${SLURM_ARRAY_TASK_ID}"
     ;;
   3)
     CASE_TAG="t32x1"
     CFG_OPTS="train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=1 \
       val_pipeline.0.clip_len=32   val_pipeline.0.frame_interval=1 \
       test_pipeline.0.clip_len=32  test_pipeline.0.frame_interval=1"
+    RUN_DIR="$work_dir/${CASE_TAG}_job3007432_${SLURM_ARRAY_TASK_ID}"
     ;;
   *)
     echo "Geçersiz array index: $SLURM_ARRAY_TASK_ID"; exit 1 ;;
 esac
 
-RUN_DIR="$work_dir/${CASE_TAG}_job${SLURM_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+
 mkdir -p "$RUN_DIR"
 
 
@@ -85,16 +89,9 @@ work_dir="/arf/scratch/zgokce/workdir/swin/WLASL100/${exp_name}"
 dump="${work_dir}/result.pkl"
 config="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"
 
-
-
-
-#train
-srun python ./tools/train.py "$config" \
-  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS 2>&1 | tee -a "$RUN_DIR/train.log"
 #test
 
 #find best checkpoint path in the workdir
-ckpt_path="${work_dir}/epoch_30.pth"
 ckpt_path="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
 
 srun python ./tools/test.py "$config" "$ckpt_path" \
