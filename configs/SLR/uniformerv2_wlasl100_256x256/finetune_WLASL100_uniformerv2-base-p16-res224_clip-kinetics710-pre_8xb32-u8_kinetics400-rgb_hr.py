@@ -86,7 +86,7 @@ val_pipeline = [
 
 test_pipeline = [
     dict(
-        type='UniformSample', clip_len=num_frames, num_clips=4,
+        type='UniformSample', clip_len=num_frames, num_clips=1,
         test_mode=True),
     dict(type='RawFrameDecode'),
     dict(type='Resize', scale=(-1, 224)),
@@ -131,7 +131,7 @@ test_dataloader = dict(
 val_evaluator = dict(type='AccMetric')
 test_evaluator = dict(type='AccMetric')
 train_cfg = dict(
-    type='EpochBasedTrainLoop', max_epochs=30, val_begin=1, val_interval=1)
+    type='EpochBasedTrainLoop', max_epochs=40, val_begin=1, val_interval=1)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
