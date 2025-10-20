@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # model settings
-num_frames = 16
+num_frames = 8
 model = dict(
     type='Recognizer3D',
     backbone=dict(
@@ -45,16 +45,15 @@ model = dict(
         format_shape='NCTHW'))
 
 
-
 # dataset settings
 dataset_type = 'RawframeDataset'
 dataset_root ="/arf/scratch/zgokce/data"
-data_root = dataset_root +'/wlasl100_64x64_640x480_PIL/train'
-data_root_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val'
-data_root_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test'
-ann_file_train = dataset_root +'/wlasl100_64x64_640x480_PIL/train_mm2.txt'
-ann_file_val = dataset_root +'/wlasl100_64x64_640x480_PIL/val_mm2.txt'
-ann_file_test = dataset_root +'/wlasl100_64x64_640x480_PIL/test_mm2.txt'
+data_root = dataset_root +'/wlasl100_frames/train'
+data_root_val = dataset_root +'/wlasl100_frames/val'
+data_root_test = dataset_root +'/wlasl100_frames/test'
+ann_file_train = dataset_root +'/wlasl100_frames/train_mm2.txt'
+ann_file_val = dataset_root +'/wlasl100_frames/val_mm2.txt'
+ann_file_test = dataset_root +'/wlasl100_frames/test_mm2.txt'
 
 
 file_client_args = dict(io_backend='disk')

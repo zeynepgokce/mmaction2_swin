@@ -1,0 +1,58 @@
+#!/bin/bash
+#SBATCH -p barbun-cuda
+#SBATCH -A zgokce
+#SBATCH -J swin_small_wlasl100_256x256
+#SBATCH --gres=gpu:1
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=20
+#SBATCH --time=02-00:00
+#SBATCH --output=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.out  # %x=job name, %j=job ID, %t=task ID
+#SBATCH --error=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.err
+
+source /etc/profile.d/modules.sh
+module purge
+module load lib/cuda/11.8
+module load miniconda3
+
+echo "NODE: $(hostname)"
+nvidia-smi
+
+wdir=/arf/home/zgokce/code/mmaction2_swin
+cd $wdir
+
+export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
+
+conda activate open-mmlab
+
+
+
+# variables to change
+dataset_root="/arf/scratch/zgokce/data"
+res="256"
+model_name="swin"
+model_type="small"
+dataset="WLASL100"
+EXP_NAME="base"
+CONFIG="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"
+RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
+CFG_OPTS="train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2  val_pipeline.0.clip_len=32   val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32  test_pipeline.0.frame_interval=1"
+dump="${$RUN_DIR}/result.pkl"
+
+echo "==> CONFIG     : $CONFIG"
+echo "==> WORK DIR   : $RUN_DIR"
+
+mkdir -p "$RUN_DIR"
+#train
+srun python ./tools/train.py "$CONFIG" \
+  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS 2>&1 | tee -a "$RUN_DIR/train.log"
+
+#TEST: find best checkpoint path in the workdir
+CKPT_PATH="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
+
+srun python ./tools/test.py "$CONFIG" "$CKPT_PATH" \
+  --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS \
+  --dump "$dump"
+
+exit

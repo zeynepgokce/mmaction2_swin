@@ -3,6 +3,10 @@
 
 import os
 
+# Orijinal şablon dosyasını oku
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny_test/job_swin_tiny.slurm"
+slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny_test"
+
 # Deney konfigürasyonları (tablodaki veriler)
 experiments = [
 	{
@@ -79,9 +83,7 @@ experiments = [
 	},
 ]
 
-# Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/job_swin_tiny.slurm"
-slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny"
+
 
 with open(template_file, 'r', encoding='utf-8') as f:
 	template_content = f.read()
@@ -92,14 +94,14 @@ for exp in experiments:
 	cfg_opts = exp["cfg_opts"]
 
 	# Çıkış dosya adı
-	output_filename = f"{slurm_folder}/job_swin_tiny_wlasl100_256x256_{deney_ismi}.slurm"
+	output_filename = f"{slurm_folder}/job_swin_tiny_wlasl100_256x256_{deney_ismi}_test.slurm"
 
 	# Şablonu kopyala
 	modified_content = template_content
 
 	# 1. #SBATCH -J satırını güncelle
 	old_j_line = "#SBATCH -J swin_tiny_base_wlasl100_256x256"
-	new_j_line = f"#SBATCH -J swin_tiny_wlasl100_256x256_{deney_ismi}"
+	new_j_line = f"#SBATCH -J swin_tiny_wlasl100_256x256_{deney_ismi}_test"
 	modified_content = modified_content.replace(old_j_line, new_j_line)
 
 	# 2. EXP_NAME değişkenini güncelle

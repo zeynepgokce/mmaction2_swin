@@ -25,7 +25,7 @@ ann_file_test = dataset_root +'/wlasl100_frames/test_mm2.txt'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
-    dict(type='SampleFrames', clip_len=16, frame_interval=2, num_clips=1),
+    dict(type='SampleFrames', clip_len=32, frame_interval=2, num_clips=1),
     dict(type='RawFrameDecode'),
     dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
@@ -37,7 +37,7 @@ train_pipeline = [
 val_pipeline = [
     dict(
         type='SampleFrames',
-        clip_len=16,
+        clip_len=32,
         frame_interval=2,
         num_clips=1,
         test_mode=True),
@@ -50,9 +50,9 @@ val_pipeline = [
 test_pipeline = [
     dict(
         type='SampleFrames',
-        clip_len=16,
+        clip_len=32,
         frame_interval=2,
-        num_clips=4,
+        num_clips=1,
         test_mode=True),
     dict(type='RawFrameDecode'),
     dict(type='Resize', scale=(-1, 224)),
@@ -63,7 +63,7 @@ test_pipeline = [
 
 train_dataloader = dict(
     batch_size=2,
-    num_workers=1,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
@@ -73,7 +73,7 @@ train_dataloader = dict(
         pipeline=train_pipeline))
 val_dataloader = dict(
     batch_size=2,
-    num_workers=1,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
