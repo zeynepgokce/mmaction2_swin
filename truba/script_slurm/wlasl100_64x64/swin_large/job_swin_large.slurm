@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J swin_large_wlasl100_256x256
+#SBATCH -J swin_large_wlasl100_64x64
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -30,12 +30,12 @@ conda activate open-mmlab
 
 # variables to change
 dataset_root="/arf/scratch/zgokce/data"
-res="256"
+res="64"
 model_name="swin"
 model_type="large"
 dataset="WLASL100"
 EXP_NAME="base"
-CONFIG="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb_hr.py"
+CONFIG="./configs/SLR/swin_wlasl100_64x64/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
 CFG_OPTS="train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2  val_pipeline.0.clip_len=32   val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32  test_pipeline.0.frame_interval=1"
 dump="${RUN_DIR}/result.pkl"

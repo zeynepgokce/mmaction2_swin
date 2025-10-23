@@ -16,7 +16,7 @@ model = dict(
         norm_cfg=dict(type='LN', eps=1e-6)),
     cls_head=dict(
         type='TimeSformerHead',
-        num_classes=400,
+        num_classes=100,
         in_channels=768,
         average_clips='prob'),
     data_preprocessor=dict(
@@ -26,9 +26,16 @@ model = dict(
         format_shape='NCTHW'))
 
 # dataset settings
-dataset_type = 'VideoDataset'
-data_root_val = 'data/kinetics400/videos_val'
-ann_file_test = 'data/kinetics400/kinetics400_val_list_videos.txt'
+# dataset settings
+dataset_type = 'RawframeDataset'
+dataset_root ="/arf/scratch/zgokce/data"
+data_root = dataset_root +'/wlasl100_frames/train'
+data_root_val = dataset_root +'/wlasl100_frames/val'
+data_root_test = dataset_root +'/wlasl100_frames/test'
+ann_file_train = dataset_root +'/wlasl100_frames/train_mm2.txt'
+ann_file_val = dataset_root +'/wlasl100_frames/val_mm2.txt'
+ann_file_test = dataset_root +'/wlasl100_frames/test_mm2.txt'
+
 
 test_pipeline = [
     dict(type='DecordInit'),
