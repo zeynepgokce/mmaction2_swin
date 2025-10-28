@@ -2,6 +2,7 @@
 
 # SLURM betikleri sırayla gönderme scripti
 # Kullanım: ./submit_slurm.sh /path/to/directory
+#bash /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/wlasl100_256x256/submit_slurm.sh /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/wlasl100_256x256/swin_tiny
 
 # Kontrol: argüman verildi mi?
 if [ $# -eq 0 ]; then
