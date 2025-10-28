@@ -4,7 +4,7 @@
 import os
 
 # Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny/job_swin_tiny.slurm"
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny/job_swin_tiny_wlasl100_256x256.slurm"
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_tiny"
 
 # Deney konfigürasyonları (tablodaki veriler)
@@ -100,7 +100,7 @@ for exp in experiments:
 	modified_content = template_content
 
 	# 1. #SBATCH -J satırını güncelle
-	old_j_line = "#SBATCH -J swin_tiny_base_wlasl100_256x256"
+	old_j_line = "#SBATCH -J swin_tiny_wlasl100_256x256_exp_base"
 	new_j_line = f"#SBATCH -J swin_tiny_wlasl100_256x256_{deney_ismi}"
 	modified_content = modified_content.replace(old_j_line, new_j_line)
 

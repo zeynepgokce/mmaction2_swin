@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J swin_tiny_base_wlasl100_256x256
+#SBATCH -J swin_tiny_wlasl100_256x256_exp_base
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
 #SBATCH --time=02-00:00
-#SBATCH --output=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.out  # %x=job name, %j=job ID, %t=task ID
-#SBATCH --error=/arf/scratch/zgokce/logs/slurm-%x-job%j-%t.err
+#SBATCH --output=/arf/scratch/zgokce/logs/swin_tiny_wlasl100_256x256/slurm-%x-job%j-%t.out  # %x=job name, %j=job ID, %t=task ID
+#SBATCH --error=/arf/scratch/zgokce/logs/swin_tiny_wlasl100_256x256/slurm-%x-job%j-%t.err
 
 source /etc/profile.d/modules.sh
 module purge
