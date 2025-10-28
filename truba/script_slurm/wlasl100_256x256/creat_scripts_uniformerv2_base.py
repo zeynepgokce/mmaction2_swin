@@ -3,7 +3,7 @@
 
 import os
 # Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base/job_uniformerv2_base.slurm"
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base/job_uniformerv2_base_wlasl100_256x256.slurm"
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base"
 experiments = [
     {
