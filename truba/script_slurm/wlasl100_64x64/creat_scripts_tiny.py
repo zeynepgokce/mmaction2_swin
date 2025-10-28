@@ -4,7 +4,7 @@
 import os
 
 # Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_64x64/swin_tiny/job_swin_tiny.slurm"
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_64x64/swin_tiny/job_swin_tiny_wlasl100_64x64.slurm"
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_64x64/swin_tiny"
 
 # Deney konfigürasyonları (tablodaki veriler)
