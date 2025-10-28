@@ -3,7 +3,7 @@
 
 import os
 # Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_large/job_swin_large.slurm"
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_large/job_swin_large_wlasl100_256x256.slurm"
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_large"
 
 #swin small
