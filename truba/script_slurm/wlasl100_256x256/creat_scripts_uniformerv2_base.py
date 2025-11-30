@@ -7,77 +7,41 @@ template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base"
 experiments = [
     {
-        "deney_ismi": "exp_lr2e-05_c8x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+        "deney_ismi": "exp_lr1e-6_c8x1_bs1",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c8x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+        "deney_ismi": "exp_lr1e-6_c8x1_bs2",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c8x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
+        "deney_ismi": "exp_lr1e-6_c8x1_bs4",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c16x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+        "deney_ismi": "exp_lr1e-6_c16x1_bs1",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c16x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+        "deney_ismi": "exp_lr1e-6_c16x1_bs2",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c16x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
+        "deney_ismi": "exp_lr1e-6_c16x1_bs4",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c32x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+        "deney_ismi": "exp_lr1e-6_c32x1_bs1",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c32x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+        "deney_ismi": "exp_lr1e-6_c32x1_bs2",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
     },
     {
-        "deney_ismi": "exp_lr2e-05_c32x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=2e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c8x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c8x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c8x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c16x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c16x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c16x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c32x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c32x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-05_c32x1_bs4",
-        "cfg_opts": "optim_wrapper.optimizer.lr=1e-05 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
-    },
+        "deney_ismi": "exp_lr1e-6_c32x1_bs4",
+        "cfg_opts": "optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=32 val_pipeline.0.clip_len=32 test_pipeline.0.clip_len=32 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
+    }
 ]
 
 

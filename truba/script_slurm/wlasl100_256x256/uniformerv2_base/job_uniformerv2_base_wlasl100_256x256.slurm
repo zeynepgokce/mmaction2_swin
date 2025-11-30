@@ -50,6 +50,7 @@ srun python ./tools/train.py "$CONFIG" \
 
 #TEST: find best checkpoint path in the workdir
 CKPT_PATH="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
+echo "==> CKPT_PATH     : CKPT_PATH"
 
 srun python ./tools/test.py "$CONFIG" "$CKPT_PATH" \
   --cfg-options work_dir="$RUN_DIR" dataset_root="$dataset_root" $CFG_OPTS \
