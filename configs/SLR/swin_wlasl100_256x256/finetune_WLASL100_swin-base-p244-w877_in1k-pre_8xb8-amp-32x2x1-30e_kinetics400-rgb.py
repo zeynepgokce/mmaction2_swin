@@ -7,7 +7,7 @@ model = dict(
         arch='base',
         drop_path_rate=0.3,
         pretrained=  # noqa: E251
-        '<https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_base_patch4_window7_224.pth'  # noqa: E501
+        'https://download.openmmlab.com/mmaction/v1.0/recognition/swin/swin_base_patch4_window7_224.pth'  # noqa: E501
     ),
     cls_head=dict(in_channels=1024, num_classes=100)
 )
