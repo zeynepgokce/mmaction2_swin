@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J swin_base_wlasl100_256x256_exp_lr1e-03_c16x2_bs4
+#SBATCH -J swin_base_wlasl100_256x256_exp_lr1e-03_c16x1_bs1
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -34,10 +34,10 @@ res="256"
 model_name="swin"
 model_type="base"
 dataset="WLASL100"
-EXP_NAME="exp_lr1e-03_c16x2_bs4"
+EXP_NAME="exp_lr1e-03_c16x1_bs1"
 CONFIG="./configs/SLR/swin_wlasl100_256x256/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
-CFG_OPTS="optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
+CFG_OPTS="optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
 dump="${RUN_DIR}/result.pkl"
 
 echo "==> CONFIG     : $CONFIG"
