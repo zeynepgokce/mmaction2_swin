@@ -42,7 +42,6 @@ dump="${RUN_DIR}/result.pkl"
 
 echo "==> CONFIG     : $CONFIG"
 echo "==> WORK DIR   : $RUN_DIR"
-echo "==> DUMP FILE  : $dump"
 
 mkdir -p "$RUN_DIR"
 #train

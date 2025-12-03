@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J uniformerv2_base_wlasl100_256x256_exp_lr1e-6_c16x1_bs1
+#SBATCH -J uniformerv2_base_wlasl100_256x256_exp_lr1e-6_c8x1_bs2
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -34,15 +34,14 @@ res="256"
 model_name="uniformerv2"
 model_type="base"
 dataset="WLASL100"
-EXP_NAME="exp_lr1e-6_c16x1_bs1"
+EXP_NAME="exp_lr1e-6_c8x1_bs2"
 CONFIG="./configs/SLR/uniformerv2_wlasl100_256x256/finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
-CFG_OPTS="optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+CFG_OPTS="optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=8 val_pipeline.0.clip_len=8 test_pipeline.0.clip_len=8 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
 dump="${RUN_DIR}/result.pkl"
 
 echo "==> CONFIG     : $CONFIG"
 echo "==> WORK DIR   : $RUN_DIR"
-echo "==> DUMP FILE  : $dump"
 
 mkdir -p "$RUN_DIR"
 #train
