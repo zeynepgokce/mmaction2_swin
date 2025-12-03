@@ -3,8 +3,8 @@
 
 import os
 # Orijinal şablon dosyasını oku
-template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base/job_uniformerv2_base_wlasl100_256x256.slurm"
-slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/uniformerv2_base"
+template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_64x64/uniformerv2_base/job_uniformerv2_base_wlasl100_64x64.slurm"
+slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_64x64/uniformerv2_base"
 experiments = [
     {
         "deney_ismi": "exp_lr1e-6_c8x1_bs1",
@@ -83,6 +83,7 @@ experiments = [
 
 
 
+
 with open(template_file, 'r', encoding='utf-8') as f:
 	template_content = f.read()
 
@@ -92,14 +93,14 @@ for exp in experiments:
 	cfg_opts = exp["cfg_opts"]
 
 	# Çıkış dosya adı
-	output_filename = f"{slurm_folder}/job_uniformerv2_base_wlasl100_256x256_{deney_ismi}.slurm"
+	output_filename = f"{slurm_folder}/job_uniformerv2_base_wlasl100_64x64_{deney_ismi}.slurm"
 
 	# Şablonu kopyala
 	modified_content = template_content
 
 	# 1. #SBATCH -J satırını güncelle
-	old_j_line = "#SBATCH -J uniformerv2_base_wlasl100_256x256"
-	new_j_line = f"#SBATCH -J uniformerv2_base_wlasl100_256x256_{deney_ismi}"
+	old_j_line = "#SBATCH -J uniformerv2_base_wlasl100_64x64"
+	new_j_line = f"#SBATCH -J uniformerv2_base_wlasl100_64x64_{deney_ismi}"
 	modified_content = modified_content.replace(old_j_line, new_j_line)
 
 	# 2. EXP_NAME değişkenini güncelle
