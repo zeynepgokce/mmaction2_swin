@@ -6,59 +6,69 @@ import os
 template_file = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_base/job_swin_base_wlasl100_256x256.slurm"
 slurm_folder = "/home/zeynep/Thesis/code/mmaction2/truba/script_slurm/wlasl100_256x256/swin_base"
 
-#swin small
+# Deney konfigürasyonları (tablodaki veriler)
 experiments = [
-    {
-        "deney_ismi": "exp_lr1e-03_c32x2_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c32x2_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-03_c32x2_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c32x2_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr1e-03_c16x2_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c16x2_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-03_c16x2_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c16x2_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr1e-03_c16x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c16x1_bs2",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
-    },
-    {
-        "deney_ismi": "exp_lr1e-03_c16x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
-    {
-        "deney_ismi": "exp_lr5e-04_c16x1_bs1",
-        "cfg_opts": "optim_wrapper.optimizer.lr=0.0005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=1 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=1 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=1 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
-    },
+	{
+		"deney_ismi": "exp_lr1e-04_c16x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.0001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-04_c16x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.0001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-04_c32x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.0001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-04_c32x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.0001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-03_c16x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-03_c16x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-03_c32x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr1e-03_c32x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.001 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=4"
+	},
+
+	{
+		"deney_ismi": "exp_lr5e-03_c16x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr5e-03_c16x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.005 train_pipeline.0.clip_len=16 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=16 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=16 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+	},
+
+	{
+		"deney_ismi": "exp_lr5e-03_c32x2_bs2",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.005 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=2 val_dataloader.batch_size=2"
+	},
+
+	{
+		"deney_ismi": "exp_lr5e-03_c32x2_bs1",
+		"cfg_opts": "optim_wrapper.optimizer.lr=0.005 train_pipeline.0.clip_len=32 train_pipeline.0.frame_interval=2 val_pipeline.0.clip_len=32 val_pipeline.0.frame_interval=2 test_pipeline.0.clip_len=32 test_pipeline.0.frame_interval=2 train_dataloader.batch_size=1 val_dataloader.batch_size=1"
+	},
+
 ]
-
-
 
 with open(template_file, 'r', encoding='utf-8') as f:
 	template_content = f.read()
