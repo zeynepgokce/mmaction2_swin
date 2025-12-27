@@ -38,7 +38,7 @@ EXP_NAME="exp_lr1e-6_c16x1_bs4"
 CONFIG="./configs/SLR/uniformerv2_wlasl100_64x64/finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/${dataset}_${res}x${res}/${model_name}/${model_type}/${EXP_NAME}_job${SLURM_JOB_ID}"
 CFG_OPTS="optim_wrapper.optimizer.lr=1e-6 train_pipeline.0.clip_len=16 val_pipeline.0.clip_len=16 test_pipeline.0.clip_len=16 train_dataloader.batch_size=4 val_dataloader.batch_size=4"
-dump="${$RUN_DIR}/result.pkl"
+dump="${RUN_DIR}/result.pkl"
 
 echo "==> CONFIG     : $CONFIG"
 echo "==> WORK DIR   : $RUN_DIR"
