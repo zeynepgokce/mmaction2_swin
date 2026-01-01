@@ -27,6 +27,8 @@ train_pipeline = [
     dict(type='DecordInit', **file_client_args),
     dict(type='SampleFrames', clip_len=32, frame_interval=2, num_clips=1),
     dict(type='DecordDecode'),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
+    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
@@ -43,6 +45,8 @@ val_pipeline = [
         num_clips=1,
         test_mode=True),
     dict(type='DecordDecode'),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
+    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(type='Resize', scale=(-1, 256)),
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
@@ -57,6 +61,8 @@ test_pipeline = [
         num_clips=1,
         test_mode=True),
     dict(type='DecordDecode'),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
+    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(type='Resize', scale=(-1, 224)),
     dict(type='ThreeCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
