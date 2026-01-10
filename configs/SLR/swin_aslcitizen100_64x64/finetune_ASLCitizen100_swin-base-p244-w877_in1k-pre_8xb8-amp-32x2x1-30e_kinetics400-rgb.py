@@ -26,15 +26,15 @@ train_pipeline = [
     dict(type='DecordInit', **file_client_args),
     dict(type='SampleFrames', clip_len=32, frame_interval=2, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(-1, 256)),
+    dict(type='Resize', scale=(64, 64), keep_ratio=False),  # for low resolution
+    dict(type='Resize', scale=(256, 256), keep_ratio=False),  # for low resolution
     dict(type='RandomResizedCrop'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
 ]
+
 val_pipeline = [
     dict(type='DecordInit', **file_client_args),
     dict(

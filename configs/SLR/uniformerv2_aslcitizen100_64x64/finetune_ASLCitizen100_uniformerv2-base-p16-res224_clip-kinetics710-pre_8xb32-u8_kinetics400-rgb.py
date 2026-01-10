@@ -59,15 +59,15 @@ train_pipeline = [
     dict(type='DecordInit', **file_client_args),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(-1, 256)),
+    #dict(type='Resize', scale=(256, 256)), #640x480 originali o nedenle 256x256 olmalı
+    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
+    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(
         type='PytorchVideoWrapper',
         op='RandAugment',
         magnitude=7,
         num_layers=4),
     dict(type='RandomResizedCrop'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False), # for low resolution
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # for low resolution
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
     dict(type='FormatShape', input_format='NCTHW'),
