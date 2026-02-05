@@ -1,0 +1,365 @@
+(base) zeynep@zeynep:~/Thesis/code/mmaction2$ conda activate open-mmlab
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ ^[[200~python tools/analysis_tools/get_flops.py \
+>   configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py \
+>   --shape 1 3 32 224 224~
+python: command not found
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py \
+  configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py \
+  --shape 1 3 32 224 224
+Traceback (most recent call last):
+  File "tools/analysis_tools/get_flops.py", line 72, in <module>
+    main()
+  File "tools/analysis_tools/get_flops.py", line 48, in main
+    model = MODELS.build(cfg.model)
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmengine/registry/registry.py", line 570, in build
+    return self.build_func(cfg, *args, **kwargs, registry=self)
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmengine/registry/build_functions.py", line 232, in build_model_from_cfg
+    return build_from_cfg(cfg, registry, default_args)
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmengine/registry/build_functions.py", line 98, in build_from_cfg
+    obj_cls = registry.get(obj_type)
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmengine/registry/registry.py", line 451, in get
+    self.import_from_location()
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmengine/registry/registry.py", line 376, in import_from_location
+    import_module(loc)
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmaction/models/__init__.py", line 6, in <module>
+    from .localizers import *  # noqa: F401,F403
+  File "/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/mmaction/models/localizers/__init__.py", line 4, in <module>
+    from .drn.drn import DRN
+ModuleNotFoundError: No module named 'mmaction.models.localizers.drn'
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python -c "import mmaction, mmaction.models; print('mmaction:', mmaction.__file__); print('models:', mmaction.models.__file__)"
+mmaction: /home/zeynep/Thesis/code/mmaction2/mmaction/__init__.py
+models: /home/zeynep/Thesis/code/mmaction2/mmaction/models/__init__.py
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ ls mmaction/models/localizers
+bmn.py  bsn.py  drn  __init__.py  __pycache__  tcanet.py  utils
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ ls mmaction/models/localizers
+bmn.py  bsn.py  drn  __init__.py  __pycache__  tcanet.py  utils
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py   --shape 1 3 32 224 224
+/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::mul encountered 60 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 108 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::sub encountered 8 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::ne encountered 4 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::rsub encountered 32 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::pad encountered 12 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::add encountered 42 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::softmax encountered 12 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::gelu encountered 12 time(s)
+02/05 22:43:03 - mmengine - WARNING - Unsupported operator aten::neg encountered 24 time(s)
+02/05 22:43:03 - mmengine - WARNING - The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+backbone.layers.0.blocks.1.drop_path, backbone.layers.1.blocks.0.drop_path, backbone.layers.1.blocks.1.drop_path, backbone.layers.2.blocks.0.drop_path, backbone.layers.2.blocks.1.drop_path, backbone.layers.2.blocks.2.drop_path, backbone.layers.2.blocks.3.drop_path, backbone.layers.2.blocks.4.drop_path, backbone.layers.2.blocks.5.drop_path, backbone.layers.3.blocks.0.drop_path, backbone.layers.3.blocks.1.drop_path, cls_head, cls_head.avg_pool, cls_head.dropout, cls_head.fc_cls, cls_head.loss_cls, data_preprocessor
+02/05 22:43:06 - mmengine - WARNING - Unsupported operator aten::layer_norm encountered 29 time(s)
+02/05 22:43:06 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 27 time(s)
+02/05 22:43:06 - mmengine - WARNING - Unsupported operator aten::sub encountered 5 time(s)
+02/05 22:43:06 - mmengine - WARNING - Unsupported operator aten::ne encountered 1 time(s)
+
++---------------------------+----------------------+------------+--------------+
+| module                    | #parameters or shape | #flops     | #activations |
++---------------------------+----------------------+------------+--------------+
+| model                     | 27.927M              | 88.062G    | 0.518G       |
+|  backbone                 |  27.85M              |  88.062G   |  0.518G      |
+|   backbone.patch_embed    |   9.504K             |   0.487G   |   4.817M     |
+|    backbone.patch_embed.… |    9.312K            |    0.462G  |    4.817M    |
+|    backbone.patch_embed.… |    0.192K            |    24.084M |    0         |
+|   backbone.layers         |   27.839M            |   87.572G  |   0.513G     |
+|    backbone.layers.0      |    0.313M            |    19.696G |    0.217G    |
+|    backbone.layers.1      |    1.217M            |    15.86G  |    0.108G    |
+|    backbone.layers.2      |    12.012M           |    39.962G |    0.161G    |
+|    backbone.layers.3.blo… |    14.297M           |    12.054G |    26.794M   |
+|   backbone.norm3          |   1.536K             |   3.011M   |   0          |
+|    backbone.norm3.weight  |    (768,)            |            |              |
+|    backbone.norm3.bias    |    (768,)            |            |              |
+|  cls_head.fc_cls          |  76.9K               |            |              |
+|   cls_head.fc_cls.weight  |   (100, 768)         |            |              |
+|   cls_head.fc_cls.bias    |   (100,)             |            |              |
++---------------------------+----------------------+------------+--------------+
+
+
+==============================
+Input shape: (1, 3, 32, 224, 224)
+Flops: 88.062G
+Params: 27.927M
+==============================
+!!!Please be cautious if you use the results in papers. You may need to check if all ops are supported and verify that the flops computation is correct.
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ ^C
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-small-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py   --shape 1 3 32 224 224
+/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::mul encountered 72 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 108 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::sub encountered 8 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::ne encountered 4 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::rsub encountered 68 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::pad encountered 24 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::add encountered 84 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::softmax encountered 24 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::gelu encountered 24 time(s)
+02/05 23:39:32 - mmengine - WARNING - Unsupported operator aten::neg encountered 24 time(s)
+02/05 23:39:32 - mmengine - WARNING - The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+backbone.layers.0.blocks.1.drop_path, backbone.layers.1.blocks.0.drop_path, backbone.layers.1.blocks.1.drop_path, backbone.layers.2.blocks.0.drop_path, backbone.layers.2.blocks.1.drop_path, backbone.layers.2.blocks.10.drop_path, backbone.layers.2.blocks.11.drop_path, backbone.layers.2.blocks.12.drop_path, backbone.layers.2.blocks.13.drop_path, backbone.layers.2.blocks.14.drop_path, backbone.layers.2.blocks.15.drop_path, backbone.layers.2.blocks.16.drop_path, backbone.layers.2.blocks.17.drop_path, backbone.layers.2.blocks.2.drop_path, backbone.layers.2.blocks.3.drop_path, backbone.layers.2.blocks.4.drop_path, backbone.layers.2.blocks.5.drop_path, backbone.layers.2.blocks.6.drop_path, backbone.layers.2.blocks.7.drop_path, backbone.layers.2.blocks.8.drop_path, backbone.layers.2.blocks.9.drop_path, backbone.layers.3.blocks.0.drop_path, backbone.layers.3.blocks.1.drop_path, cls_head, cls_head.avg_pool, cls_head.dropout, cls_head.fc_cls, cls_head.loss_cls, data_preprocessor
+02/05 23:39:35 - mmengine - WARNING - Unsupported operator aten::layer_norm encountered 53 time(s)
+02/05 23:39:35 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 27 time(s)
+02/05 23:39:35 - mmengine - WARNING - Unsupported operator aten::sub encountered 5 time(s)
+02/05 23:39:35 - mmengine - WARNING - Unsupported operator aten::ne encountered 1 time(s)
+
++------------------------------+----------------------+------------+--------------+
+| module                       | #parameters or shape | #flops     | #activations |
++------------------------------+----------------------+------------+--------------+
+| model                        | 49.586M              | 0.166T     | 0.84G        |
+|  backbone                    |  49.509M             |  0.166T    |  0.84G       |
+|   backbone.patch_embed       |   9.504K             |   0.487G   |   4.817M     |
+|    backbone.patch_embed.proj |    9.312K            |    0.462G  |    4.817M    |
+|    backbone.patch_embed.norm |    0.192K            |    24.084M |    0         |
+|   backbone.layers            |   49.498M            |   0.166T   |   0.835G     |
+|    backbone.layers.0         |    0.313M            |    19.696G |    0.217G    |
+|    backbone.layers.1         |    1.217M            |    15.86G  |    0.108G    |
+|    backbone.layers.2         |    33.671M           |    0.118T  |    0.483G    |
+|    backbone.layers.3.blocks  |    14.297M           |    12.054G |    26.794M   |
+|   backbone.norm3             |   1.536K             |   3.011M   |   0          |
+|    backbone.norm3.weight     |    (768,)            |            |              |
+|    backbone.norm3.bias       |    (768,)            |            |              |
+|  cls_head.fc_cls             |  76.9K               |            |              |
+|   cls_head.fc_cls.weight     |   (100, 768)         |            |              |
+|   cls_head.fc_cls.bias       |   (100,)             |            |              |
++------------------------------+----------------------+------------+--------------+
+
+
+==============================
+Input shape: (1, 3, 32, 224, 224)
+Flops: 0.166T
+Params: 49.586M
+==============================
+!!!Please be cautious if you use the results in papers. You may need to check if all ops are supported and verify that the flops computation is correct.
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-base-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py   --shape 1 3 32 224 224
+/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::mul encountered 72 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 108 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::sub encountered 8 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::ne encountered 4 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::rsub encountered 68 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::pad encountered 24 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::add encountered 84 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::softmax encountered 24 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::gelu encountered 24 time(s)
+02/05 23:40:46 - mmengine - WARNING - Unsupported operator aten::neg encountered 24 time(s)
+02/05 23:40:46 - mmengine - WARNING - The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+backbone.layers.0.blocks.1.drop_path, backbone.layers.1.blocks.0.drop_path, backbone.layers.1.blocks.1.drop_path, backbone.layers.2.blocks.0.drop_path, backbone.layers.2.blocks.1.drop_path, backbone.layers.2.blocks.10.drop_path, backbone.layers.2.blocks.11.drop_path, backbone.layers.2.blocks.12.drop_path, backbone.layers.2.blocks.13.drop_path, backbone.layers.2.blocks.14.drop_path, backbone.layers.2.blocks.15.drop_path, backbone.layers.2.blocks.16.drop_path, backbone.layers.2.blocks.17.drop_path, backbone.layers.2.blocks.2.drop_path, backbone.layers.2.blocks.3.drop_path, backbone.layers.2.blocks.4.drop_path, backbone.layers.2.blocks.5.drop_path, backbone.layers.2.blocks.6.drop_path, backbone.layers.2.blocks.7.drop_path, backbone.layers.2.blocks.8.drop_path, backbone.layers.2.blocks.9.drop_path, backbone.layers.3.blocks.0.drop_path, backbone.layers.3.blocks.1.drop_path, cls_head, cls_head.avg_pool, cls_head.dropout, cls_head.fc_cls, cls_head.loss_cls, data_preprocessor
+02/05 23:40:52 - mmengine - WARNING - Unsupported operator aten::layer_norm encountered 53 time(s)
+02/05 23:40:52 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 27 time(s)
+02/05 23:40:52 - mmengine - WARNING - Unsupported operator aten::sub encountered 5 time(s)
+02/05 23:40:52 - mmengine - WARNING - Unsupported operator aten::ne encountered 1 time(s)
+
++------------------------------+----------------------+------------+--------------+
+| module                       | #parameters or shape | #flops     | #activations |
++------------------------------+----------------------+------------+--------------+
+| model                        | 87.741M              | 0.282T     | 1.12G        |
+|  backbone                    |  87.639M             |  0.282T    |  1.12G       |
+|   backbone.patch_embed       |   12.672K            |   0.649G   |   6.423M     |
+|    backbone.patch_embed.proj |    12.416K           |    0.617G  |    6.423M    |
+|    backbone.patch_embed.norm |    0.256K            |    32.113M |    0         |
+|   backbone.layers            |   87.624M            |   0.281T   |   1.113G     |
+|    backbone.layers.0         |    0.549M            |    31.605G |    0.289G    |
+|    backbone.layers.1         |    2.146M            |    26.49G  |    0.145G    |
+|    backbone.layers.2         |    59.574M           |    0.202T  |    0.644G    |
+|    backbone.layers.3.blocks  |    25.355M           |    21.005G |    35.725M   |
+|   backbone.norm3             |   2.048K             |   4.014M   |   0          |
+|    backbone.norm3.weight     |    (1024,)           |            |              |
+|    backbone.norm3.bias       |    (1024,)           |            |              |
+|  cls_head.fc_cls             |  0.102M              |            |              |
+|   cls_head.fc_cls.weight     |   (100, 1024)        |            |              |
+|   cls_head.fc_cls.bias       |   (100,)             |            |              |
++------------------------------+----------------------+------------+--------------+
+
+
+==============================
+Input shape: (1, 3, 32, 224, 224)
+Flops: 0.282T
+Params: 87.741M
+==============================
+!!!Please be cautious if you use the results in papers. You may need to check if all ops are supported and verify that the flops computation is correct.
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/swin_wlasl100_64x64_performans/finetune_WLASL100_swin-large-p244-w877_in22k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py  --shape 1 3 32 224 224
+/home/zeynep/anaconda3/envs/open-mmlab/lib/python3.7/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::mul encountered 72 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 108 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::sub encountered 8 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::ne encountered 4 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::rsub encountered 68 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::pad encountered 24 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::add encountered 84 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::softmax encountered 24 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::gelu encountered 24 time(s)
+02/05 23:41:23 - mmengine - WARNING - Unsupported operator aten::neg encountered 24 time(s)
+02/05 23:41:23 - mmengine - WARNING - The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+backbone.layers.0.blocks.1.drop_path, backbone.layers.1.blocks.0.drop_path, backbone.layers.1.blocks.1.drop_path, backbone.layers.2.blocks.0.drop_path, backbone.layers.2.blocks.1.drop_path, backbone.layers.2.blocks.10.drop_path, backbone.layers.2.blocks.11.drop_path, backbone.layers.2.blocks.12.drop_path, backbone.layers.2.blocks.13.drop_path, backbone.layers.2.blocks.14.drop_path, backbone.layers.2.blocks.15.drop_path, backbone.layers.2.blocks.16.drop_path, backbone.layers.2.blocks.17.drop_path, backbone.layers.2.blocks.2.drop_path, backbone.layers.2.blocks.3.drop_path, backbone.layers.2.blocks.4.drop_path, backbone.layers.2.blocks.5.drop_path, backbone.layers.2.blocks.6.drop_path, backbone.layers.2.blocks.7.drop_path, backbone.layers.2.blocks.8.drop_path, backbone.layers.2.blocks.9.drop_path, backbone.layers.3.blocks.0.drop_path, backbone.layers.3.blocks.1.drop_path, cls_head, cls_head.avg_pool, cls_head.dropout, cls_head.fc_cls, cls_head.loss_cls, data_preprocessor
+02/05 23:41:33 - mmengine - WARNING - Unsupported operator aten::layer_norm encountered 53 time(s)
+02/05 23:41:33 - mmengine - WARNING - Unsupported operator aten::fill_ encountered 27 time(s)
+02/05 23:41:33 - mmengine - WARNING - Unsupported operator aten::sub encountered 5 time(s)
+02/05 23:41:33 - mmengine - WARNING - Unsupported operator aten::ne encountered 1 time(s)
+
++------------------------------+----------------------+------------+--------------+
+| module                       | #parameters or shape | #flops     | #activations |
++------------------------------+----------------------+------------+--------------+
+| model                        | 0.196G               | 0.604T     | 1.679G       |
+|  backbone                    |  0.196G              |  0.604T    |  1.679G      |
+|   backbone.patch_embed       |   19.008K            |   0.973G   |   9.634M     |
+|    backbone.patch_embed.proj |    18.624K           |    0.925G  |    9.634M    |
+|    backbone.patch_embed.norm |    0.384K            |    48.169M |    0         |
+|   backbone.layers            |   0.196G             |   0.603T   |   1.67G      |
+|    backbone.layers.0         |    1.217M            |    63.439G |    0.434G    |
+|    backbone.layers.1         |    4.792M            |    55.765G |    0.217G    |
+|    backbone.layers.2         |    0.133G            |    0.438T  |    0.966G    |
+|    backbone.layers.3.blocks  |    56.906M           |    46.305G |    53.588M   |
+|   backbone.norm3             |   3.072K             |   6.021M   |   0          |
+|    backbone.norm3.weight     |    (1536,)           |            |              |
+|    backbone.norm3.bias       |    (1536,)           |            |              |
+|  cls_head.fc_cls             |  0.154M              |            |              |
+|   cls_head.fc_cls.weight     |   (100, 1536)        |            |              |
+|   cls_head.fc_cls.bias       |   (100,)             |            |              |
++------------------------------+----------------------+------------+--------------+
+
+
+==============================
+Input shape: (1, 3, 32, 224, 224)
+Flops: 0.604T
+Params: 0.196G
+==============================
+!!!Please be cautious if you use the results in papers. You may need to check if all ops are supported and verify that the flops computation is correct.
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/uniformerv2_  --shape 1 3 32 224 224
+uniformerv2_aslcitizen100_256x256/ uniformerv2_aslcitizen100_64x64/   uniformerv2_wlasl100_256x256/      uniformerv2_wlasl100_64x64/
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/uniformerv2_wlasl100_64x64/finetune_WLASL100_uniformerv2-  --shape 1 3 32 224 224
+finetune_WLASL100_uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb.py  finetune_WLASL100_uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb.py
+(open-mmlab) zeynep@zeynep:~/Thesis/code/mmaction2$ python tools/analysis_tools/get_flops.py   configs/SLR/uniformerv2_wlasl100_64x64/finetune_WLASL100_uniformerv2-large-p14-res224_clip-kinetics710-pre_u16_kinetics400-rgb.py  --shape 1 3 32 224 224
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:10 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:10 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - No L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Double L_MHRA: True
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:11 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:12 - mmengine - INFO - Drop path rate: 0.0
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::mul encountered 156 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::add encountered 75 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::repeat encountered 1 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::div encountered 52 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::softmax encountered 28 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::sigmoid encountered 29 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::clone encountered 8 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::sub encountered 4 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::numpy_T encountered 12 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::neg encountered 16 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::mean encountered 1 time(s)
+02/05 23:43:31 - mmengine - WARNING - Unsupported operator aten::rsub encountered 1 time(s)
+02/05 23:43:31 - mmengine - WARNING - The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+backbone.transformer.resblocks.0.attn.out_proj, backbone.transformer.resblocks.1.attn.out_proj, backbone.transformer.resblocks.10.attn.out_proj, backbone.transformer.resblocks.11.attn.out_proj, backbone.transformer.resblocks.12.attn.out_proj, backbone.transformer.resblocks.13.attn.out_proj, backbone.transformer.resblocks.14.attn.out_proj, backbone.transformer.resblocks.15.attn.out_proj, backbone.transformer.resblocks.16.attn.out_proj, backbone.transformer.resblocks.17.attn.out_proj, backbone.transformer.resblocks.18.attn.out_proj, backbone.transformer.resblocks.19.attn.out_proj, backbone.transformer.resblocks.2.attn.out_proj, backbone.transformer.resblocks.20.attn.out_proj, backbone.transformer.resblocks.21.attn.out_proj, backbone.transformer.resblocks.22.attn.out_proj, backbone.transformer.resblocks.23.attn.out_proj, backbone.transformer.resblocks.3.attn.out_proj, backbone.transformer.resblocks.4.attn.out_proj, backbone.transformer.resblocks.5.attn.out_proj, backbone.transformer.resblocks.6.attn.out_proj, backbone.transformer.resblocks.7.attn.out_proj, backbone.transformer.resblocks.8.attn.out_proj, backbone.transformer.resblocks.9.attn.out_proj, cls_head, cls_head.dropout, cls_head.fc_cls, cls_head.loss_cls, data_preprocessor
+02/05 23:43:50 - mmengine - WARNING - Unsupported operator aten::layer_norm encountered 62 time(s)
+
++--------------------------------------------+-------------------------+------------+--------------+
+| module                                     | #parameters or shape    | #flops     | #activations |
++--------------------------------------------+-------------------------+------------+--------------+
+| model                                      | 0.354G                  | 2.665T     | 2.943G       |
+|  backbone                                  |  0.354G                 |  2.665T    |  2.943G      |
+|   backbone.class_embedding                 |   (1024,)               |            |              |
+|   backbone.positional_embedding            |   (257, 1024)           |            |              |
+|   backbone.conv1                           |   0.602M                |   4.933G   |   8.389M     |
+|    backbone.conv1.weight                   |    (1024, 3, 1, 14, 14) |            |              |
+|   backbone.ln_pre                          |   2.048K                |   42.107M  |   0          |
+|    backbone.ln_pre.weight                  |    (1024,)              |            |              |
+|    backbone.ln_pre.bias                    |    (1024,)              |            |              |
+|   backbone.transformer                     |   0.353G                |   2.66T    |   2.934G     |
+|    backbone.transformer.temporal_cls_token |    (1, 1, 1024)         |            |              |
+|    backbone.transformer.balance            |    (1024,)              |            |              |
+|    backbone.transformer.resblocks          |    0.302G               |    2.589T  |    2.833G    |
+|    backbone.transformer.dpe                |    0.115M               |    0.906G  |    33.554M   |
+|    backbone.transformer.dec                |    50.393M              |    69.308G |    67.963M   |
+|    backbone.transformer.norm               |    2.048K               |    10.24K  |    0         |
+|  cls_head.fc_cls                           |  0.102M                 |            |              |
+|   cls_head.fc_cls.weight                   |   (100, 1024)           |            |              |
+|   cls_head.fc_cls.bias                     |   (100,)                |            |              |
++--------------------------------------------+-------------------------+------------+--------------+
+
+
+==============================
+Input shape: (1, 3, 32, 224, 224)
+Flops: 2.665T
+Params: 0.354G
+==============================
+!!!Please be cautious if you use the results in papers. You may need to check if all ops are supported and verify that the flops computation is correct.
