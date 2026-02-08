@@ -160,11 +160,15 @@ class MMAction2Inferencer(BaseInferencer):
 
         preds = self.forward(ori_inputs, batch_size, **forward_kwargs)
 
+        """
+        # sadece prediction almak için kapatıldı inference time için
         visualization = self.visualize(
             ori_inputs, preds,
             **visualize_kwargs)  # type: ignore  # noqa: E501
         results = self.postprocess(preds, visualization, **postprocess_kwargs)
         return results
+        """
+        return None
 
     def _inputs_to_list(self, inputs: InputsType) -> list:
         """Preprocess the inputs to a list. The main difference from mmengine

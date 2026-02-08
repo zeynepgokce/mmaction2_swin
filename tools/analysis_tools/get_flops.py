@@ -54,7 +54,7 @@ def main():
         raise NotImplementedError(
             'FLOPs counter is currently not currently supported with {}'.
             format(model.__class__.__name__))
-
+    print("model loaded -----------------")
     analysis_results = get_model_complexity_info(model, input_shape)
     flops = analysis_results['flops_str']
     params = analysis_results['params_str']
