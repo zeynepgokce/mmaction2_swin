@@ -7,6 +7,16 @@ from mmengine import Config
 from mmengine.registry import init_default_scope
 from mmaction.registry import MODELS
 
+def count_params(model):
+    total = sum(p.numel() for p in model.parameters())
+    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    return total, trainable
+
+def model_size_mb(model, dtype_bytes=4):
+    total_params = sum(p.numel() for p in model.parameters())
+    size_mb = total_params * dtype_bytes / (1024 ** 2)
+    return size_mb
+
 
 def parse_args():
     p = argparse.ArgumentParser("Measure inference latency for MMAction2 model")
@@ -77,6 +87,12 @@ def main():
     print(f"P50 latency: {p50*1000:.3f} ms")
     print(f"FPS (approx): {fps:.2f}")
 
+    total, trainable = count_params(model)
+    print(f"Total params: {total:,}")
+    print(f"Trainable params: {trainable:,}")
+
+    size_mb = model_size_mb(model)
+    print(f"Model size (FP32): {size_mb:.2f} MB")
 
 if __name__ == "__main__":
     main()
