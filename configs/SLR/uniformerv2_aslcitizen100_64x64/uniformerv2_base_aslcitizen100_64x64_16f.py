@@ -45,12 +45,12 @@ model = dict(
 # dataset settings
 dataset_type = 'VideoDataset'
 dataset_root = '/arf/scratch/zgokce/data'
-data_root = dataset_root + '/ASL_Citizen/ASL_Citizen100/train'
-data_root_val = dataset_root + '/ASL_Citizen/ASL_Citizen100/val'
-data_root_test = dataset_root + '/ASL_Citizen/ASL_Citizen100/test'
-ann_file_train = dataset_root + '/ASL_Citizen/ASL_Citizen100/train_aslcitizen100_mm2.txt'
-ann_file_val = dataset_root + '/ASL_Citizen/ASL_Citizen100/val_aslcitizen100_mm2.txt'
-ann_file_test = dataset_root + '/ASL_Citizen/ASL_Citizen100/test_aslcitizen100_mm2.txt'
+data_root = dataset_root + '/ASL_Citizen/train'
+data_root_val = dataset_root + '/ASL_Citizen/val'
+data_root_test = dataset_root + '/ASL_Citizen/test'
+ann_file_train = dataset_root + '/ASL_Citizen/train_aslcitizen100_mm2.txt'
+ann_file_val = dataset_root + '/ASL_Citizen/val_aslcitizen100_mm2.txt'
+ann_file_test = dataset_root + '/ASL_Citizen/test_aslcitizen100_mm2.txt'
 
 file_client_args = dict(io_backend='disk')
 train_pipeline = [
