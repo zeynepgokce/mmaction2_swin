@@ -4,7 +4,7 @@
 # NOTE: Set SR path below when ASLCitizen SR dataset is available.
 _base_ = ['../uniformer_aslcitizen100_train256.py']
 
-_SR_ROOT = '/arf/scratch/zgokce/data/ASL_Citizen_SR'  # TODO: update when ready
+_SR_ROOT = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_SR_flashvsr'  # TODO: update when ready
 
 test_dataloader = dict(
     _delete_=True,
