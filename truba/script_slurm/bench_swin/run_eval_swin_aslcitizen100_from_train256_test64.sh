@@ -1,15 +1,15 @@
 #!/bin/bash
-#SBATCH -p akya-cuda
+#SBATCH -p barbun-cuda
 #SBATCH -A zgokce
 #SBATCH -J bench_eval_swin_aslcitizen_tr256_te64
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=00-04:00
-#SBATCH --output=/arf/scratch/zgokce/logs/bench/swin/slurm-%x-job%j-%t.out
-#SBATCH --error=/arf/scratch/zgokce/logs/bench/swin/slurm-%x-job%j-%t.err
+#SBATCH --output=/arf/scratch/zgokce/logs/bench/swin_base/slurm-%x-job%j-%t.out
+#SBATCH --error=/arf/scratch/zgokce/logs/bench/swin_base/slurm-%x-job%j-%t.err
 
 source /etc/profile.d/modules.sh
 module purge
@@ -25,12 +25,12 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
 
-CONFIG="./configs/SLR/bench_swin/eval/swin_aslcitizen100_from_train256_test64.py"
-TRAIN_WORKDIR="/arf/scratch/zgokce/bench/swin/aslcitizen100/train_256"
-EVAL_DIR="/arf/scratch/zgokce/bench/swin/aslcitizen100/eval_from_train256_test64"
-REPORT_DIR="/arf/scratch/zgokce/bench/reports"
+CONFIG="./configs/SLR/bench_swin_base/eval/swin_aslcitizen100_from_train256_test64resized256.py"
+TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/swin_base/aslcitizen100/train_256"
+EVAL_DIR="/arf/scratch/zgokce/workdir/swin_base/aslcitizen100/eval_from_train256_test64resized256"
+REPORT_DIR="/arf/scratch/zgokce/workdir/swin_base/aslcitizen100/reports"
 
-mkdir -p "$EVAL_DIR" "$REPORT_DIR" /arf/scratch/zgokce/logs/bench/swin
+mkdir -p "$EVAL_DIR" "$REPORT_DIR" /arf/scratch/zgokce/logs/bench/swin_base
 
 CKPT_PATH="$(find "$TRAIN_WORKDIR" -type f -name 'best_acc_top1_epoch*.pth' \
   -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
