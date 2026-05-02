@@ -21,8 +21,8 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/arf/scratch/zgokce/data/wlasl100_videos_64x64/test_wlasl100_mm2.txt',
+        ann_file='/arf/scratch/zgokce/data/wlasl100_videos_256x256_bilinear/test_wlasl100_mm2.txt',
         data_prefix=dict(
-            video='/arf/scratch/zgokce/data/wlasl100_videos_64x64/test'),
+            video='/arf/scratch/zgokce/data/wlasl100_videos_256x256_bilinear/test'),
         pipeline=test_pipeline,
         test_mode=True))
