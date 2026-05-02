@@ -13,24 +13,22 @@ model = dict(
     cls_head=dict(in_channels=1024, num_classes=100))
 
 # ── Dataset ────────────────────────────────────────────────────────────────
-# BENCH: Train_64_resize256 — source videos are actual 64×64;
-#   pipeline bilinearly resizes 64→256 before any augmentation.
+# BENCH: Train_256 — source videos are 256×256 (actual 256 dataset)
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/train'
-data_root_val = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/val'
-data_root_test = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/test'
-ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/train_wlasl100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/val_wlasl100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/test_wlasl100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/train'
+data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/val'
+data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/test'
+ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
-# Source: 64×64 → bilinear 64→256 → RandomResizedCrop → 224×224
-# The first Resize is the ONLY difference vs Train_256 (no short-side resize).
+# Source: 256×256 → short-side to 256 → RandomResizedCrop → 224×224
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(256, 256), keep_ratio=False),  # 64→256 bilinear
+    dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
@@ -41,7 +39,7 @@ val_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1, test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(256, 256), keep_ratio=False),  # 64→256 bilinear
+    dict(type='Resize', scale=(-1, 256)),
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
@@ -91,7 +89,7 @@ train_cfg = dict(
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
-# ── Optimizer (identical to baseline 16f) ─────────────────────────────────
+# ── Optimizer ─────────────────────────────────────────────────────────────
 optim_wrapper = dict(
     type='AmpOptimWrapper',
     optimizer=dict(

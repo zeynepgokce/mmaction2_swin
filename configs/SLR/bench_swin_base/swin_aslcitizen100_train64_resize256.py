@@ -13,25 +13,23 @@ model = dict(
     cls_head=dict(in_channels=1024, num_classes=100))
 
 # ── Dataset ────────────────────────────────────────────────────────────────
-# BENCH: Train_64_resize256 — ASLCitizen at native resolution; pipeline
-# first downsamples to 64×64 (simulating a 64×64 sensor), then bilinearly
-# upsamples to 256×256 before augmentation. Same source data as Train_256.
+# BENCH: Train_64_resize256 — source videos are actual 64×64;
+#   pipeline bilinearly resizes 64→256 before any augmentation.
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/ASL_Citizen/train'
-data_root_val = '/arf/scratch/zgokce/data/ASL_Citizen/val'
-data_root_test = '/arf/scratch/zgokce/data/ASL_Citizen/test'
-ann_file_train = '/arf/scratch/zgokce/data/ASL_Citizen/train_aslcitizen100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/ASL_Citizen/val_aslcitizen100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/ASL_Citizen/test_aslcitizen100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/train'
+data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/val'
+data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/test'
+ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
-# Simulate 64×64 source: decode → Resize(64) → Resize(256 bilinear) → crop
+# Source: 64×64 → bilinear 64→256 → RandomResizedCrop → 224×224
+# The first Resize is the ONLY difference vs Train_256 (no short-side resize).
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False),   # simulate 64×64
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
@@ -42,8 +40,6 @@ val_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1, test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False),   # simulate 64×64
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
