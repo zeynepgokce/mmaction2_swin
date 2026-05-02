@@ -6,7 +6,7 @@
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=00-04:00
 #SBATCH --output=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.out
 #SBATCH --error=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.err
@@ -25,9 +25,9 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
 
-CONFIG="./configs/SLR/bench_uniformer/eval/uniformer_wlasl100_from_train64_test64.py"
+CONFIG="./configs/SLR/bench_uniformer/eval/uniformer_wlasl100_from_train64_test64resized256.py"
 TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/train_64_resize256"
-EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/eval_from_train64_test64"
+EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/eval_from_train64_test64resized256"
 REPORT_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/reports"
 
 mkdir -p "$EVAL_DIR" "$REPORT_DIR" /arf/scratch/zgokce/logs/bench/uniformer

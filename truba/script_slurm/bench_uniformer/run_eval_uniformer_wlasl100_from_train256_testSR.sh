@@ -6,7 +6,7 @@
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=00-04:00
 #SBATCH --output=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.out
 #SBATCH --error=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.err

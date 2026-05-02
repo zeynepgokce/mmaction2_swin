@@ -6,7 +6,7 @@
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=20
 #SBATCH --time=00-04:00
 #SBATCH --output=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.out
 #SBATCH --error=/arf/scratch/zgokce/logs/bench/uniformer/slurm-%x-job%j-%t.err
@@ -25,7 +25,6 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
 
-# NOTE: Update eval config with ASLCitizen SR data path before running.
 CONFIG="./configs/SLR/bench_uniformer/eval/uniformer_aslcitizen100_from_train256_testSR.py"
 TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/uniformer_v2/aslcitizen100/train_256"
 EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/aslcitizen100/eval_from_train256_testSR"
