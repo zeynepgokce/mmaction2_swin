@@ -1,14 +1,13 @@
 # Eval config: UniFormerV2-Base / ASLCitizen100
 #   Checkpoint from: Train_256 workdir
-#   Test input:      Simulated 64×64 (native → Resize(64) → bilinear 256)
+#   Test input:      64×64 actual source → bilinear resize to 256×256 → CenterCrop 224
 _base_ = ['../uniformer_aslcitizen100_train256.py']
 
 test_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1, test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False),   # simulate 64×64
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
+    dict(type='Resize', scale=(256, 256), keep_ratio=False),  # 64→256 bilinear
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
@@ -22,7 +21,7 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/arf/scratch/zgokce/data/ASL_Citizen/test_aslcitizen100_mm2.txt',
-        data_prefix=dict(video='/arf/scratch/zgokce/data/ASL_Citizen/test'),
+        ann_file='/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt',
+        data_prefix=dict(video='/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test'),
         pipeline=test_pipeline,
         test_mode=True))
