@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -p akya-cuda
+#SBATCH -p barbun-cuda
 #SBATCH -A zgokce
 #SBATCH -J bench_eval_uniformer_aslcitizen_tr256_teSR
 #SBATCH --gres=gpu:1
