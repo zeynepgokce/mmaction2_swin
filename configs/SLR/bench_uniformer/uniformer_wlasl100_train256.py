@@ -46,12 +46,12 @@ model = dict(
 # ── Dataset ────────────────────────────────────────────────────────────────
 # BENCH: Train_256 — source videos are 256×256 (actual 256 dataset)
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/WLASL/train'
-data_root_val = '/arf/scratch/zgokce/data/WLASL/val'
-data_root_test = '/arf/scratch/zgokce/data/WLASL/test'
-ann_file_train = '/arf/scratch/zgokce/data/WLASL/train_wlasl100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/WLASL/val_wlasl100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/WLASL/test_wlasl100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/train'
+data_root_val = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/val'
+data_root_test = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/test'
+ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/train_wlasl100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/val_wlasl100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/test_wlasl100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 # Source: 256×256 → short-side to 256 → RandAugment → RandomResizedCrop → 224
