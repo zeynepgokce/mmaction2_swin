@@ -1,11 +1,7 @@
 # Eval config: Swin-Base / ASLCitizen100
 #   Checkpoint from: Train_256 workdir
-#   Test input:      SR 256×256 (super-resolved dataset)
-# NOTE: Set SR data path below when ASLCitizen SR dataset is available.
-#       Placeholder: /arf/scratch/zgokce/data/ASL_Citizen_SR
+#   Test input:      SR 256×256 (64×64 → 256×256,FlashVSR model)
 _base_ = ['../swin_aslcitizen100_train256.py']
-
-_SR_ROOT = '/arf/scratch/zgokce/data/ASL_Citizen_SR'  # TODO: update when SR data is ready
 
 test_dataloader = dict(
     _delete_=True,
@@ -15,8 +11,9 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file=_SR_ROOT + '/test_aslcitizen100_mm2.txt',
-        data_prefix=dict(video=_SR_ROOT + '/test'),
+        ann_file='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_SR_flashvsr/test_aslcitizen100_mm2.txt',  # noqa: E501
+        data_prefix=dict(
+            video='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_SR_flashvsr/test'),
         pipeline=[
             dict(type='DecordInit', io_backend='disk'),
             dict(type='UniformSample', clip_len=16, num_clips=1,
