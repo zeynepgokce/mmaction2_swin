@@ -43,23 +43,22 @@ model = dict(
         format_shape='NCTHW'))
 
 # ── Dataset ────────────────────────────────────────────────────────────────
-# BENCH: Train_64_resize256 — ASLCitizen native resolution, pipeline
-# simulates 64×64 source (downsample → bilinear upsample to 256).
+# BENCH: Train_64_resize256 — source videos are actual 64×64;
+#   pipeline bilinearly resizes 64→256 before augmentation.
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/ASL_Citizen/train'
-data_root_val = '/arf/scratch/zgokce/data/ASL_Citizen/val'
-data_root_test = '/arf/scratch/zgokce/data/ASL_Citizen/test'
-ann_file_train = '/arf/scratch/zgokce/data/ASL_Citizen/train_aslcitizen100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/ASL_Citizen/val_aslcitizen100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/ASL_Citizen/test_aslcitizen100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train'
+data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val'
+data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test'
+ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
-# Simulate 64×64 source: decode → Resize(64) → Resize(256 bilinear) → augment
+# Source: 64×64 → bilinear 64→256 → RandAugment → RandomResizedCrop → 224
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False),   # simulate 64×64
     dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
     dict(type='PytorchVideoWrapper', op='RandAugment', magnitude=7,
          num_layers=4),
@@ -74,7 +73,6 @@ val_pipeline = [
     dict(type='UniformSample', clip_len=num_frames, num_clips=1,
          test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(64, 64), keep_ratio=False),   # simulate 64×64
     dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
@@ -119,11 +117,13 @@ test_dataloader = dict(
 val_evaluator = dict(type='AccMetric')
 test_evaluator = dict(type='AccMetric')
 
+# ── Training loop ──────────────────────────────────────────────────────────
 train_cfg = dict(
     type='EpochBasedTrainLoop', max_epochs=40, val_begin=1, val_interval=1)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
+# ── Optimizer ─────────────────────────────────────────────────────────────
 base_lr = 2e-6
 optim_wrapper = dict(
     optimizer=dict(

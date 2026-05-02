@@ -45,14 +45,15 @@ model = dict(
 # ── Dataset ────────────────────────────────────────────────────────────────
 # BENCH: Train_256 — ASLCitizen at native resolution; no artificial downscale
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/ASL_Citizen/train'
-data_root_val = '/arf/scratch/zgokce/data/ASL_Citizen/val'
-data_root_test = '/arf/scratch/zgokce/data/ASL_Citizen/test'
-ann_file_train = '/arf/scratch/zgokce/data/ASL_Citizen/train_aslcitizen100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/ASL_Citizen/val_aslcitizen100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/ASL_Citizen/test_aslcitizen100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/train'
+data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/val'
+data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/test'
+ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
+# Source: 256×256 → short-side to 256 → RandAugment → RandomResizedCrop → 224
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
@@ -115,11 +116,13 @@ test_dataloader = dict(
 val_evaluator = dict(type='AccMetric')
 test_evaluator = dict(type='AccMetric')
 
+# ── Training loop ──────────────────────────────────────────────────────────
 train_cfg = dict(
     type='EpochBasedTrainLoop', max_epochs=40, val_begin=1, val_interval=1)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
+# ── Optimizer ─────────────────────────────────────────────────────────────
 base_lr = 2e-6
 optim_wrapper = dict(
     optimizer=dict(
