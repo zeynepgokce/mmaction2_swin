@@ -25,7 +25,7 @@ cd $wdir
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
 
-CONFIG="./configs/SLR/bench_uniformer/uniformer_wlasl100_train64_resize256.py"
+CONFIG="./configs/SLR/bench_uniformer_v2/uniformer_wlasl100_train64_resize256.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/train_64_resize256"
 REPORT_DIR="/arf/scratch/zgokce/workdir/uniformer_v2/wlasl100/reports"
 
@@ -40,7 +40,7 @@ CKPT_PATH="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' \
 echo "==> BEST CKPT: $CKPT_PATH"
 
 EVAL_DIR="${RUN_DIR}/eval_from_train64_test64"
-EVAL_CONFIG="./configs/SLR/bench_uniformer/eval/uniformer_wlasl100_from_train64_test64.py"
+EVAL_CONFIG="./configs/SLR/bench_uniformer_v2/eval/uniformer_wlasl100_from_train64_test64resized256.py"
 mkdir -p "$EVAL_DIR"
 
 srun python ./tools/test.py "$EVAL_CONFIG" "$CKPT_PATH" \
