@@ -59,7 +59,7 @@ train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(256, 256), keep_ratio=False), # bilinear 64→256
+    dict(type='Resize', scale=(256, 256), keep_ratio=False),  # 64→256 bilinear
     dict(type='PytorchVideoWrapper', op='RandAugment', magnitude=7,
          num_layers=4),
     dict(type='RandomResizedCrop'),
@@ -119,7 +119,7 @@ test_evaluator = dict(type='AccMetric')
 
 # ── Training loop ──────────────────────────────────────────────────────────
 train_cfg = dict(
-    type='EpochBasedTrainLoop', max_epochs=40, val_begin=1, val_interval=1)
+    type='EpochBasedTrainLoop', max_epochs=30, val_begin=1, val_interval=1)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
