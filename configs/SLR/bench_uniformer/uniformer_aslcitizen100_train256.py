@@ -1,40 +1,21 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # ── Model ──────────────────────────────────────────────────────────────────
+# UniFormer-Small, 16 frames, ImageNet-1K pretrained
 num_frames = 16
 model = dict(
     type='Recognizer3D',
     backbone=dict(
-        type='UniFormerV2',
-        input_resolution=224,
-        patch_size=16,
-        width=768,
-        layers=12,
-        heads=12,
-        t_size=num_frames,
-        dw_reduction=1.5,
-        backbone_drop_path_rate=0.,
-        temporal_downsample=False,
-        no_lmhra=True,
-        double_lmhra=True,
-        return_list=[8, 9, 10, 11],
-        n_layers=4,
-        n_dim=768,
-        n_head=12,
-        mlp_factor=4.,
-        drop_path_rate=0.,
-        mlp_dropout=[0.5, 0.5, 0.5, 0.5],
-        clip_pretrained=False,
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint=  # noqa: E251
-            'https://download.openmmlab.com/mmaction/v1.0/recognition/uniformerv2/kinetics710/uniformerv2-base-p16-res224_clip-pre_u8_kinetics710-rgb_20221219-77d34f81.pth',  # noqa: E501
-            prefix='backbone.')),
+        type='UniFormer',
+        depth=[3, 4, 8, 3],
+        embed_dim=[64, 128, 320, 512],
+        head_dim=64,
+        drop_path_rate=0.1),
     cls_head=dict(
-        type='TimeSformerHead',
-        dropout_ratio=0.5,
+        type='I3DHead',
+        dropout_ratio=0.,
         num_classes=100,
-        in_channels=768,
+        in_channels=512,
         average_clips='prob'),
     data_preprocessor=dict(
         type='ActionDataPreprocessor',
@@ -154,4 +135,4 @@ default_hooks = dict(
 
 auto_scale_lr = dict(enable=False, base_batch_size=2)
 
-load_from = './ckpt/uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics400-rgb_20230313-75be0806.pth'  # noqa: E501
+load_from = './ckpt/uniformer-small_imagenet1k-pre_16x4x1_kinetics400-rgb_20221219-c630a037.pth'
