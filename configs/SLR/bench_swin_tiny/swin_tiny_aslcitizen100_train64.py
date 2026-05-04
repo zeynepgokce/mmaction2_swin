@@ -7,7 +7,8 @@ _base_ = [
 num_frames = 16
 model = dict(
     backbone=dict(
-        arch='tiny'),
+        arch='tiny',
+        pretrained2d=False),
     cls_head=dict(num_classes=100))
 
 

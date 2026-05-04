@@ -95,7 +95,7 @@ test_cfg = dict(type='TestLoop')
 optim_wrapper = dict(
     type='AmpOptimWrapper',
     optimizer=dict(
-        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.02),
+        type='AdamW', lr=1e-4, betas=(0.9, 0.999), weight_decay=0.02),
     constructor='SwinOptimWrapperConstructor',
     paramwise_cfg=dict(
         absolute_pos_embed=dict(decay_mult=0.),
