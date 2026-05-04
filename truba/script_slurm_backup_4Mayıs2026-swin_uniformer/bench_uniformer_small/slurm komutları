@@ -1,0 +1,6 @@
+sbatch /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/bench_uniformer/run_train_uniformer_wlasl100_256.sh
+sbatch /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/bench_uniformer/run_train_uniformer_aslcitizen100_64_resize256.sh
+
+
+sbatch /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/bench_uniformer/run_train_uniformer_wlasl100_64_resize256.sh
+sbatch /arf/home/zgokce/code/mmaction2_swin/truba/script_slurm/bench_uniformer/run_train_uniformer_aslcitizen100_256.sh

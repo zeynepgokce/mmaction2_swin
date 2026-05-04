@@ -1,0 +1,77 @@
+/home/zeynep/anaconda3/envs/open-mmlab/bin/python /home/zeynep/Thesis/code/mmaction2/evaluate_complexity.py /home/zeynep/Thesis/code/mmaction2/configs/SLR/bench_uniformer/uniformer_aslcitizen100_train256.py -c /home/zeynep/Thesis/code/mmaction2/workdir/uniformer_v2/aslcitizen100/train_256/best_acc_top1_epoch_35.pth
+Device : cuda
+
+[data] data_prefix.video [DEFAULTS] → /media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets//ASLCitizen100_videos_256x256/test
+[data] ann_file          [DEFAULTS] → /media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets//ASLCitizen100_videos_256x256/test_aslcitizen100_mm2.txt
+[ckpt] Using provided checkpoint:
+       /home/zeynep/Thesis/code/mmaction2/workdir/uniformer_v2/aslcitizen100/train_256/best_acc_top1_epoch_35.pth
+[ckpt] Checkpoint file size: 441.08 MB
+
+05/03 01:12:12 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:12 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:12 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:12 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:12 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:12 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - No L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Double L_MHRA: True
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+05/03 01:12:13 - mmengine - INFO - Drop path rate: 0.0
+[ckpt] Unwrapped checkpoint key: 'state_dict'
+[ckpt] Weights loaded successfully.
+
+05/03 01:12:14 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+05/03 01:12:14 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+[data] Real sample loaded from test set.  shape=(1, 1, 3, 16, 224, 224)
+
+----------------------------------
+TRAIN MODE
+Total Params (M):              114.3215
+Trainable Params (M):          114.3215
+Model Size from Params (MB):   436.10
+Checkpoint File Size (MB):     441.08
+  [fvcore cross-check] Matches manual count (114.3215 M)  ✓
+----------------------------------
+EVAL MODE (TEST)
+Total Params (M):              114.3215
+Trainable Params (M):          114.3215
+Model Size from Params (MB):   436.10
+Checkpoint File Size (MB):     441.08
+  [fvcore cross-check] Matches manual count (114.3215 M)  ✓
+----------------------------------
+EVAL MODE (TEST) - SPEED & COMPUTE
+Inference Time (ms):           113.14
+GFLOPs:                        296.54
+----------------------------------
+
+Process finished with exit code 0

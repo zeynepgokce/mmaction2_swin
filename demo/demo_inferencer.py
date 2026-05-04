@@ -7,11 +7,11 @@ from mmaction.apis.inferencers import MMAction2Inferencer
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument(
-        'inputs', type=str, help='Input video file or rawframes folder path.')
+        'inputs', type=str, default="/home/zeynep/Thesis/code/mmaction2/demo/demo_configs/swin_aslcitizen100_64x64/finetune_ASLCitizen100_swin-tiny-p244-w877_in1k-pre_8xb8-amp-32x2x1-30e_kinetics400-rgb.py", help='Input video file or rawframes folder path.')
     parser.add_argument(
         '--vid-out-dir',
         type=str,
-        default='',
+        default='./out',
         help='Output directory of videos.')
     parser.add_argument(
         '--rec',
@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument(
         '--device',
         type=str,
-        default=None,
+        default="cuda:0",
         help='Device used for inference. '
         'If not specified, the available device will be automatically used.')
     parser.add_argument(

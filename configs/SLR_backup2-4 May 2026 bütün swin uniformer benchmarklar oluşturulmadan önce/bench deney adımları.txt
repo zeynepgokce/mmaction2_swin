@@ -1,0 +1,178 @@
+ Swin Deney Configleri — Kullanım Kılavuzu
+
+  ---
+  1. Eğitim Configleri
+
+  Model-HR — 256×256 ile eğitim
+
+  # WLASL100
+  python tools/train.py configs/SLR/bench_swin_base/swin_wlasl100_train256.py \
+      --work-dir work_dirs/swin_wlasl100_HR
+
+  # ASLCitizen100
+  python tools/train.py configs/SLR/bench_swin_base/swin_aslcitizen100_train256.py \
+      --work-dir work_dirs/swin_aslcitizen100_HR
+
+  Ne yapar: Gerçek 256×256 videolardan 16 frame uniform sample eder. Video → kısa kenar 256 → RandomResizedCrop → 224×224 olarak modele girer.
+
+  ---
+  Model-LR — 64×64 ile eğitim
+
+  # WLASL100
+  python tools/train.py configs/SLR/bench_swin_base/swin_wlasl100_train64_resize256.py \
+      --work-dir work_dirs/swin_wlasl100_LR
+
+  # ASLCitizen100
+  python tools/train.py configs/SLR/bench_swin_base/swin_aslcitizen100_train64_resize256.py \
+      --work-dir work_dirs/swin_aslcitizen100_LR
+
+  Ne yapar: 64×64 kaynak video → bilinear 256×256 → RandomResizedCrop → 224×224. Model degraded görüntü dağılımını öğrenir.
+
+  ---
+  2. Test Configleri — Model-HR için 5 senaryo
+
+  Checkpoint yolu olarak work_dirs/swin_wlasl100_HR/best_*.pth gibi en iyi epoch'u kullanın.
+
+  ---
+  Senaryo 1 — 256×256 (Üst sınır, referans)
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train256_test256.py \
+      work_dirs/swin_wlasl100_HR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: Model ne ile eğitildiyse aynı kalitede veri ile test edilir. Beklenen en yüksek doğruluk buradan gelir.
+
+  ---
+  Senaryo 2 — 64×64 Direkt (Alt sınır)
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train256_test64_direct.py \
+      work_dirs/swin_wlasl100_HR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: 64×64 video → doğrudan 224×224'e resize. Model HR görmüş ama en kötü girdi alır. Beklenen en düşük doğruluk.
+
+  ---
+  Senaryo 3 — 256×256 Bilinear Upsample
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train256_test64.py \
+      work_dirs/swin_wlasl100_HR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: 64×64 video → bilinear interpolasyon ile 256×256'ya büyütülür → CenterCrop 224. SR olmadan basit upsample baseline'ı.
+
+  ---
+  Senaryo 4 — 256×256 BasicVSR SR
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train256_testSR.py \
+      work_dirs/swin_wlasl100_HR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: BasicVSR (Vimeo90K-BD) ile üretilmiş SR videoları kullanır. Geleneksel SR modelinin SLR'a katkısını ölçer.
+
+  ---
+  Senaryo 5 — 256×256 FlashVSR SR
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train256_testSR_flashvsr.py \
+      work_dirs/swin_wlasl100_HR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: FlashVSR ile üretilmiş SR videoları kullanır. Modern/hızlı SR modelinin katkısını ölçer.
+
+  ▎ Not: FlashVSR data hazır olmadan çalıştırılamaz. Önce testSR_flashvsr.py içindeki _SR_ROOT yolunu güncelleyin.
+
+  ---
+  3. Model-LR için test
+
+  python tools/test.py \
+      configs/SLR/bench_swin_base/eval/swin_wlasl100_from_train64_test64.py \
+      work_dirs/swin_wlasl100_LR/best_acc_top1_epoch_XX.pth
+
+  Ne yapar: LR model kendi dağılımında (64×64 → bilinear 256 → 224) test edilir.
+
+  ---
+  4. ASLCitizen için aynı yapı
+
+  WLASL100 komutlarında wlasl100 → aslcitizen100 ve swin_wlasl100_HR/LR → swin_aslcitizen100_HR/LR değiştirmeniz yeterli. Config yapısı birebir aynı.
+
+  ---
+  Beklenen sonuç sıralaması (Model-HR)
+
+  test256 (Senaryo 1)      > testSR_flashvsr (5) > testSR_basicvsr (4)
+                           > test64_bilinear (3) > test64_direct (2)
+      ↑ üst sınır                                       ↑ alt sınır
+
+  SR modellerinin bilinear'dan ne kadar iyi olduğu, FlashVSR ile BasicVSR arasındaki fark burada ölçülür.
+
+❯ bunu bir de tablo olarak ifade et
+
+● Swin Deney Configleri — Tablo
+
+  Eğitim
+
+  ┌──────────┬───────────────┬─────────────────────────────────────────┬─────────────────────────────────┬───────────────────────┬────────────────────────────────────────────────┐
+  │  Model   │    Dataset    │                 Config                  │            Work Dir             │     Eğitim Verisi     │                    Pipeline                    │
+  ├──────────┼───────────────┼─────────────────────────────────────────┼─────────────────────────────────┼───────────────────────┼────────────────────────────────────────────────┤
+  │ Model-HR │ WLASL100      │ swin_wlasl100_train256.py               │ work_dirs/swin_wlasl100_HR      │ 256×256 gerçek video  │ video → kısa kenar 256 → RandCrop → 224        │
+  ├──────────┼───────────────┼─────────────────────────────────────────┼─────────────────────────────────┼───────────────────────┼────────────────────────────────────────────────┤
+  │ Model-LR │ WLASL100      │ swin_wlasl100_train64_resize256.py      │ work_dirs/swin_wlasl100_LR      │ 64×64 gerçek video    │ 64×64 → bilinear 256 → RandCrop → 224          │
+  ├──────────┼───────────────┼─────────────────────────────────────────┼─────────────────────────────────┼───────────────────────┼────────────────────────────────────────────────┤
+  │ Model-HR │ ASLCitizen100 │ swin_aslcitizen100_train256.py          │ work_dirs/swin_aslcitizen100_HR │ native HR video       │ video → kısa kenar 256 → RandCrop → 224        │
+  ├──────────┼───────────────┼─────────────────────────────────────────┼─────────────────────────────────┼───────────────────────┼────────────────────────────────────────────────┤
+  │ Model-LR │ ASLCitizen100 │ swin_aslcitizen100_train64_resize256.py │ work_dirs/swin_aslcitizen100_LR │ native HR (simüle 64) │ HR → 64×64 sim → bilinear 256 → RandCrop → 224 │
+  └──────────┴───────────────┴─────────────────────────────────────────┴─────────────────────────────────┴───────────────────────┴────────────────────────────────────────────────┘
+
+  ---
+  Test — Model-HR (5 senaryo)
+
+  ┌─────┬──────────────┬───────────────┬──────────────────────────────────────────────────────────┬─────────────────────────────────────────────────┬──────────────────────────┐
+  │  #  │   Senaryo    │    Dataset    │                       Eval Config                        │                  Test Pipeline                  │         Beklenti         │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 1   │ 256×256 HR   │ WLASL100      │ eval/swin_wlasl100_from_train256_test256.py              │ 256×256 → kısa kenar 256 → CenterCrop 224       │ En yüksek — üst sınır    │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 2   │ 64×64 Direkt │ WLASL100      │ eval/swin_wlasl100_from_train256_test64_direct.py        │ 64×64 → direkt 224×224                          │ En düşük — alt sınır     │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 3   │ Bilinear 256 │ WLASL100      │ eval/swin_wlasl100_from_train256_test64.py               │ 64×64 → bilinear 256×256 → CenterCrop 224       │ Senaryo 2 ile 4 arası    │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 4   │ BasicVSR SR  │ WLASL100      │ eval/swin_wlasl100_from_train256_testSR.py               │ SR 256×256 → kısa kenar 256 → CenterCrop 224    │ Senaryo 3'ten iyi        │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 5   │ FlashVSR SR  │ WLASL100      │ eval/swin_wlasl100_from_train256_testSR_flashvsr.py      │ SR 256×256 → kısa kenar 256 → CenterCrop 224    │ Senaryo 4 ile kıyaslanır │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 1   │ 256×256 HR   │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train256_test256.py         │ native → kısa kenar 256 → CenterCrop 224        │ En yüksek — üst sınır    │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 2   │ 64×64 Direkt │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train256_test64_direct.py   │ native → 64 sim → direkt 224×224                │ En düşük — alt sınır     │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 3   │ Bilinear 256 │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train256_test64.py          │ native → 64 sim → bilinear 256 → CenterCrop 224 │ Senaryo 2 ile 4 arası    │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 4   │ BasicVSR SR  │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train256_testSR.py          │ SR 256×256 → kısa kenar 256 → CenterCrop 224    │ Senaryo 3'ten iyi        │
+  ├─────┼──────────────┼───────────────┼──────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┼──────────────────────────┤
+  │ 5   │ FlashVSR SR  │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train256_testSR_flashvsr.py │ SR 256×256 → kısa kenar 256 → CenterCrop 224    │ Senaryo 4 ile kıyaslanır │
+  └─────┴──────────────┴───────────────┴──────────────────────────────────────────────────────────┴─────────────────────────────────────────────────┴──────────────────────────┘
+
+  ---
+  Test — Model-LR (kendi dağılımında)
+
+  ┌───────────────┬────────────────────────────────────────────────┬─────────────────────────────────────────────────┬───────────────────────────────────────┐
+  │    Dataset    │                  Eval Config                   │                  Test Pipeline                  │                 Amaç                  │
+  ├───────────────┼────────────────────────────────────────────────┼─────────────────────────────────────────────────┼───────────────────────────────────────┤
+  │ WLASL100      │ eval/swin_wlasl100_from_train64_test64.py      │ 64×64 → bilinear 256 → CenterCrop 224           │ LR modelin kendi domain'inde başarısı │
+  ├───────────────┼────────────────────────────────────────────────┼─────────────────────────────────────────────────┼───────────────────────────────────────┤
+  │ ASLCitizen100 │ eval/swin_aslcitizen100_from_train64_test64.py │ native → 64 sim → bilinear 256 → CenterCrop 224 │ LR modelin kendi domain'inde başarısı │
+  └───────────────┴────────────────────────────────────────────────┴─────────────────────────────────────────────────┴───────────────────────────────────────┘
+
+  ---
+  Tüm senaryolarda ortak
+
+  ┌────────────────────┬─────────────────────────────────────────────┐
+  │     Parametre      │                    Değer                    │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Frame sampling     │ UniformSample — video boyunca eşit aralıklı │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Clip uzunluğu      │ 16 frame                                    │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Num clips          │ 1                                           │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Final input boyutu │ 224×224                                     │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Batch size (test)  │ 1                                           │
+  ├────────────────────┼─────────────────────────────────────────────┤
+  │ Metric             │ Top-1 Accuracy                              │
