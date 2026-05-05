@@ -14,14 +14,13 @@ model = dict(
 
 # ── Dataset ────────────────────────────────────────────────────────────────
 # BENCH: Train_64_resize256 — source videos are actual 64×64;
-#   pipeline bilinearly resizes 64→256 before augmentation.
 dataset_type = 'VideoDataset'
-data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train'
-data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val'
-data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test'
-ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
+data_root = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train'
+data_root_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val'
+data_root_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test'
+ann_file_train = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
+ann_file_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
+ann_file_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 # Source: 64×64 → bilinear 64→256 → RandomResizedCrop → 224

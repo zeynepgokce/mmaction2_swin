@@ -12,9 +12,9 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_SR_flashvsr/test_aslcitizen100_mm2.txt',  # noqa: E501
+        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_SR_flashvsr/test_aslcitizen100_mm2.txt',  # noqa: E501
         data_prefix=dict(
-            video='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_SR_flashvsr/test'),
+            video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_SR_flashvsr/test'),
         pipeline=[
             dict(type='DecordInit', io_backend='disk'),
             dict(type='UniformSample', clip_len=16, num_clips=1,
