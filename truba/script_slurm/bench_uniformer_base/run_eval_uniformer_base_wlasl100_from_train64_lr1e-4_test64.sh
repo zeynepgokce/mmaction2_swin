@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J bench_eval_uniformer_base_wlasl100_tr64_lr4_te64
+#SBATCH -J eval_uniformer_base_wlasl100_tr64_lr1e-4_test64
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --time=00-04:00
+#SBATCH --time=00-02:00
 #SBATCH --output=/arf/scratch/zgokce/logs/uniformer_base/slurm-%x-job%j-%t.out
 #SBATCH --error=/arf/scratch/zgokce/logs/uniformer_base/slurm-%x-job%j-%t.err
 

@@ -50,12 +50,12 @@ model = dict(
         format_shape='NCTHW'))
 # ── Dataset ────────────────────────────────────────────────────────────────
 dataset_type = 'VideoDataset'
-data_root = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train'
-data_root_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val'
-data_root_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test'
-ann_file_train = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
-ann_file_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
-ann_file_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
+data_root = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train'
+data_root_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val'
+data_root_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test'
+ann_file_train = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 train_pipeline = [
@@ -89,7 +89,7 @@ test_pipeline = val_pipeline
 # ── Dataloaders ────────────────────────────────────────────────────────────
 train_dataloader = dict(
     batch_size=1,
-    num_workers=1,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     dataset=dict(
@@ -99,7 +99,7 @@ train_dataloader = dict(
         pipeline=train_pipeline))
 val_dataloader = dict(
     batch_size=1,
-    num_workers=1,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -110,7 +110,7 @@ val_dataloader = dict(
         test_mode=True))
 test_dataloader = dict(
     batch_size=1,
-    num_workers=1,
+    num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
@@ -163,4 +163,4 @@ default_hooks = dict(
 
 auto_scale_lr = dict(enable=False, base_batch_size=2)
 
-load_from = '/home/zeynep/Thesis/code/mmaction2/ckpt/uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics600-rgb_20230313-544f06f0.pth'
+load_from = '/arf/home/zgokce/code/mmaction2_swin/ckpt/uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics600-rgb_20230313-544f06f0.pth'

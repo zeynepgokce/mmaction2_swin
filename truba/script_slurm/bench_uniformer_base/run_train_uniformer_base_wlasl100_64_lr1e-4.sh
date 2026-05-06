@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J bench_train_uniformer_base_wlasl100_64_lr1e-4
+#SBATCH -J train_uniformer_base_wlasl100_64_lr1e-4
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --time=02-00:00
+#SBATCH --time=01-02:00
 #SBATCH --output=/arf/scratch/zgokce/logs/uniformer_base/slurm-%x-job%j-%t.out
 #SBATCH --error=/arf/scratch/zgokce/logs/uniformer_base/slurm-%x-job%j-%t.err
 
@@ -42,7 +42,7 @@ CKPT_PATH="$(find "$RUN_DIR" -type f -name 'best_acc_top1_epoch*.pth' \
   -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2-)"
 echo "==> BEST CKPT: $CKPT_PATH"
 
-EVAL_DIR="${RUN_DIR}/eval_from_train64_lr1e-4_test64"
+EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_base/wlasl100/eval_from_train64_lr1e-4_test64"
 mkdir -p "$EVAL_DIR"
 
 srun python ./tools/test.py "$CONFIG" "$CKPT_PATH" \
