@@ -21,11 +21,11 @@ fi
 
 # Eşleşen dosyaları bul
 shopt -s nullglob
-SLURM_FILES=("$SCRIPT_DIR"/job*.slurm)
+SLURM_FILES=("$SCRIPT_DIR"/run*.sh)
 
 # Kontrol: eşleşen dosya var mı?
 if [ ${#SLURM_FILES[@]} -eq 0 ]; then
-    echo "Hata: $SCRIPT_DIR dizininde job_*.slurm dosyası bulunamadı!"
+    echo "Hata: $SCRIPT_DIR dizininde run_*.sh dosyası bulunamadı!"
     exit 1
 fi
 
