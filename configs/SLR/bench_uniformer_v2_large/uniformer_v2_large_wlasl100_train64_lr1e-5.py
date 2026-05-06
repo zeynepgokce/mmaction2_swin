@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # ── Model ──────────────────────────────────────────────────────────────────
-num_frames = 16
+num_frames = 8
 model = dict(
     type='Recognizer3D',
     backbone=dict(
@@ -42,9 +42,9 @@ dataset_type = 'VideoDataset'
 data_root = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/train'
 data_root_val = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/val'
 data_root_test = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/test'
-ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/train_aslcitizen100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/val_aslcitizen100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/test_aslcitizen100_mm2.txt'
+ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/train_wlasl100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/val_wlasl100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_64x64/test_wlasl100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 train_pipeline = [
