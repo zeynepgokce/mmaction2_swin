@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
 # ── Model ──────────────────────────────────────────────────────────────────
-num_frames = 8
+num_frames = 16
 model = dict(
     type='Recognizer3D',
     backbone=dict(
@@ -42,16 +42,16 @@ dataset_type = 'VideoDataset'
 data_root = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/train'
 data_root_val = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/val'
 data_root_test = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/test'
-ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/train_wlasl100_mm2.txt'
-ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/val_wlasl100_mm2.txt'
-ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/test_wlasl100_mm2.txt'
+ann_file_train = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/train_aslcitizen100_mm2.txt'
+ann_file_val = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/val_aslcitizen100_mm2.txt'
+ann_file_test = '/arf/scratch/zgokce/data/wlasl100_videos_256x256/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(-1, 256)),
+    dict(type='Resize', scale=(256, 256), keep_ratio=False),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
@@ -63,7 +63,7 @@ val_pipeline = [
     dict(type='UniformSample', clip_len=num_frames, num_clips=1,
          test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(-1, 256)),
+    dict(type='Resize', scale=(256, 256), keep_ratio=False),
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
@@ -72,7 +72,7 @@ test_pipeline = val_pipeline
 
 # ── Dataloaders ────────────────────────────────────────────────────────────
 train_dataloader = dict(
-    batch_size=2,
+    batch_size=1,
     num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -82,7 +82,7 @@ train_dataloader = dict(
         data_prefix=dict(video=data_root),
         pipeline=train_pipeline))
 val_dataloader = dict(
-    batch_size=2,
+    batch_size=1,
     num_workers=4,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
@@ -116,7 +116,7 @@ test_cfg = dict(type='TestLoop')
 # ── Optimizer ──────────────────────────────────────────────────────────────
 optim_wrapper = dict(
     optimizer=dict(
-        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.05),
+        type='AdamW', lr=2e-6, betas=(0.9, 0.999), weight_decay=0.05),
     paramwise_cfg=dict(norm_decay_mult=0.0, bias_decay_mult=0.0),
     clip_grad=dict(max_norm=20, norm_type=2))
 

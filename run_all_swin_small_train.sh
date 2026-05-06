@@ -19,26 +19,6 @@ run_train() {
 }
 
 run_train \
-  "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_aslcitizen100_train64.py" \
-  "$WDIR/swin_small/aslcitizen100/train_64"
-
-run_train \
-  "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_aslcitizen100_train64_lr1e-4.py" \
-  "$WDIR/swin_small/aslcitizen100/train_64_lr1e-4"
-
-run_train \
-  "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_aslcitizen100_train256.py" \
-  "$WDIR/swin_small/aslcitizen100/train_256"
-
-run_train \
-  "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_aslcitizen100_train256_lr1e-4.py" \
-  "$WDIR/swin_small/aslcitizen100/train_256_lr1e-4"
-
-run_train \
-  "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_wlasl100_train64.py" \
-  "$WDIR/swin_small/wlasl100/train_64"
-
-run_train \
   "$BASE_DIR/configs/SLR/bench_swin_small/swin_small_wlasl100_train64_lr1e-4.py" \
   "$WDIR/swin_small/wlasl100/train_64_lr1e-4"
 
