@@ -143,4 +143,4 @@ default_hooks = dict(
 
 auto_scale_lr = dict(enable=False, base_batch_size=2)
 
-load_from = '/home/zeynep/Thesis/code/mmaction2/ckpt/uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics600-rgb_20230313-544f06f0.pth'
+load_from = '/arf/home/zgokce/code/mmaction2_swin/ckpt/uniformerv2-base-p16-res224_clip-kinetics710-pre_8xb32-u8_kinetics600-rgb_20230313-544f06f0.pth'
