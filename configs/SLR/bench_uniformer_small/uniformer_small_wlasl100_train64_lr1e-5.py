@@ -128,4 +128,4 @@ default_hooks = dict(
 
 auto_scale_lr = dict(enable=False, base_batch_size=2)
 
-load_from = '/home/zeynep/Thesis/code/mmaction2/ckpt/uniformer-small_imagenet1k-pre_16x4x1_kinetics400-rgb_20221219-c630a037.pth'
+load_from = '/arf/home/zgokce/code/mmaction2_swin/ckpt/uniformer-small_imagenet1k-pre_16x4x1_kinetics400-rgb_20221219-c630a037.pth'
