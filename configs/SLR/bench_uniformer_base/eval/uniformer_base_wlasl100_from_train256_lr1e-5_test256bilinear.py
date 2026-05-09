@@ -1,4 +1,4 @@
-_base_ = ['../uniformer_small_wlasl100_train256_lr1e-4.py']
+_base_ = ['../uniformer_base_wlasl100_train256_lr1e-5.py']
 
 # Override test pipeline: bilinear-upscaled 64->256 input
 test_pipeline = [
@@ -20,7 +20,7 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/media/zeynep/SSD/phd/datasets/WLASL/wlasl100_videos_256x256_bilinear/test_wlasl100_mm2.txt',
-        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/WLASL/wlasl100_videos_256x256_bilinear/test'),
+        ann_file='/arf/scratch/zgokce/data/wlasl100_videos_256x256_bilinear/test_wlasl100_mm2.txt',
+        data_prefix=dict(video='/arf/scratch/zgokce/data/wlasl100_videos_256x256_bilinear/test'),
         pipeline=test_pipeline,
         test_mode=True))

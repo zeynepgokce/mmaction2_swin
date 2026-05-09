@@ -24,19 +24,19 @@ model = dict(
 
 # ── Dataset ────────────────────────────────────────────────────────────────
 dataset_type = 'VideoDataset'
-data_root = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train'
-data_root_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val'
-data_root_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test'
-ann_file_train = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/train_aslcitizen100_mm2.txt'
-ann_file_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/val_aslcitizen100_mm2.txt'
-ann_file_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt'
+data_root = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/train'
+data_root_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/val'
+data_root_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/test'
+ann_file_train = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/train_aslcitizen100_mm2.txt'
+ann_file_val = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/val_aslcitizen100_mm2.txt'
+ann_file_test = '/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256/test_aslcitizen100_mm2.txt'
 
 # ── Pipelines ──────────────────────────────────────────────────────────────
 train_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=num_frames, num_clips=1),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(256, 256), keep_ratio=False),
+    dict(type='Resize', scale=(-1, 256)),
     dict(type='RandomResizedCrop'),
     dict(type='Resize', scale=(224, 224), keep_ratio=False),
     dict(type='Flip', flip_ratio=0.5),
@@ -48,7 +48,7 @@ val_pipeline = [
     dict(type='UniformSample', clip_len=num_frames, num_clips=1,
          test_mode=True),
     dict(type='DecordDecode'),
-    dict(type='Resize', scale=(256, 256), keep_ratio=False),
+    dict(type='Resize', scale=(-1, 256)),
     dict(type='CenterCrop', crop_size=224),
     dict(type='FormatShape', input_format='NCTHW'),
     dict(type='PackActionInputs')
@@ -101,7 +101,7 @@ test_cfg = dict(type='TestLoop')
 # ── Optimizer ──────────────────────────────────────────────────────────────
 optim_wrapper = dict(
     optimizer=dict(
-        type='AdamW', lr=1e-4, betas=(0.9, 0.999), weight_decay=0.05),
+        type='AdamW', lr=1e-5, betas=(0.9, 0.999), weight_decay=0.05),
     paramwise_cfg=dict(norm_decay_mult=0.0, bias_decay_mult=0.0),
     clip_grad=dict(max_norm=20, norm_type=2))
 

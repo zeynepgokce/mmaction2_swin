@@ -101,7 +101,7 @@ test_cfg = dict(type='TestLoop')
 # ── Optimizer ──────────────────────────────────────────────────────────────
 optim_wrapper = dict(
     optimizer=dict(
-        type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.05),
+        type='AdamW', lr=2e-6, betas=(0.9, 0.999), weight_decay=0.05),
     paramwise_cfg=dict(norm_decay_mult=0.0, bias_decay_mult=0.0),
     clip_grad=dict(max_norm=20, norm_type=2))
 
