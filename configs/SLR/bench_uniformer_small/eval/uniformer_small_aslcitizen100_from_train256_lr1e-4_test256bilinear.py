@@ -1,5 +1,6 @@
-_base_ = ['../uniformer_small_aslcitizen100_train64_lr1e-5.py']
+_base_ = ['../uniformer_small_aslcitizen100_train256_lr1e-4.py']
 
+# Override test pipeline: bilinear-upscaled 64->256 input
 test_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
     dict(type='UniformSample', clip_len=16, num_clips=1, test_mode=True),
@@ -10,6 +11,7 @@ test_pipeline = [
     dict(type='PackActionInputs')
 ]
 
+# Override test dataloader: bilinear-upscaled dataset
 test_dataloader = dict(
     _delete_=True,
     batch_size=1,
@@ -18,7 +20,7 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt',
-        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test'),
+        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test_aslcitizen100_mm2.txt',
+        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test'),
         pipeline=test_pipeline,
         test_mode=True))

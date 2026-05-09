@@ -1,4 +1,4 @@
-_base_ = ['../uniformer_base_aslcitizen100_train256_lr1e-5.py']
+_base_ = ['../uniformer_base_wlasl100_train256_lr1e-4.py']
 
 # Override test dataloader: SR input
 test_dataloader = dict(
@@ -9,8 +9,8 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_SR_flashvsr/test_aslcitizen100_mm2.txt',
-        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_SR_flashvsr/test'),
+        ann_file='/media/zeynep/SSD/phd/datasets/WLASL/wlasl100_videos_256x256_SR_flashvsr/test_wlasl100_mm2.txt',
+        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/WLASL/wlasl100_videos_256x256_SR_flashvsr/test'),
         pipeline=[
             dict(type='DecordInit', io_backend='disk'),
             dict(type='UniformSample', clip_len=16, num_clips=1,
