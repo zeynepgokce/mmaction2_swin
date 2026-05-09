@@ -9,8 +9,8 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/arf/scratch/zgokce/data/wlasl100_videos_64x64_SR_flashvsr/test_wlasl100_mm2.txt',
-        data_prefix=dict(video='/arf/scratch/zgokce/data/wlasl100_videos_64x64_SR_flashvsr/test'),
+        ann_file='/arf/scratch/zgokce/data/wlasl100_videos_256x256_SR_flashvsr/test_wlasl100_mm2.txt',
+        data_prefix=dict(video='/arf/scratch/zgokce/data/wlasl100_videos_256x256_SR_flashvsr/test'),
         pipeline=[
             dict(type='DecordInit', io_backend='disk'),
             dict(type='UniformSample', clip_len=16, num_clips=1,

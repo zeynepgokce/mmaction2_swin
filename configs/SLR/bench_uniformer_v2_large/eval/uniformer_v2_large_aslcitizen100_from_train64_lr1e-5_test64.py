@@ -1,4 +1,4 @@
-_base_ = ['../swin_base_aslcitizen100_train256.py']
+_base_ = ['../uniformer_v2_large_aslcitizen100_train64_lr1e-5.py']
 
 test_pipeline = [
     dict(type='DecordInit', io_backend='disk'),
@@ -13,13 +13,12 @@ test_pipeline = [
 test_dataloader = dict(
     _delete_=True,
     batch_size=1,
-    num_workers=4,
+    num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test_aslcitizen100_mm2.txt',  # noqa: E501
-        data_prefix=dict(
-            video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test'),
+        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test_aslcitizen100_mm2.txt',
+        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_64x64/test'),
         pipeline=test_pipeline,
         test_mode=True))

@@ -20,7 +20,7 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type='VideoDataset',
-        ann_file='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/test_aslcitizen100_mm2.txt',
-        data_prefix=dict(video='/arf/scratch/zgokce/data/ASLCitizen100_videos_256x256_bilinear/test'),
+        ann_file='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test_aslcitizen100_mm2.txt',
+        data_prefix=dict(video='/media/zeynep/SSD/phd/datasets/ASL_Citizen/subsets/ASLCitizen100_videos_256x256_bilinear/test'),
         pipeline=test_pipeline,
         test_mode=True))
