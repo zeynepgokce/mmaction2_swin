@@ -24,25 +24,13 @@ model = dict(
         mlp_factor=4.,
         drop_path_rate=0.,
         mlp_dropout=[0.5, 0.5, 0.5, 0.5],
-        clip_pretrained=False,
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint=  # noqa: E251
-            'https://download.openmmlab.com/mmaction/v1.0/recognition/uniformerv2/kinetics710/uniformerv2-base-p16-res224_clip-pre_u8_kinetics710-rgb_20221219-77d34f81.pth',  # noqa: E501
-            prefix='backbone.')),
+        clip_pretrained=False),
     cls_head=dict(
         type='UniFormerHead',
         dropout_ratio=0.5,
-        num_classes=600,
+        num_classes=100,
         in_channels=768,
-        average_clips='prob',
-        channel_map=  # noqa: E251
-        'configs/recognition/uniformerv2/k710_channel_map/map_k600.json',
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint=  # noqa: E251
-            'https://download.openmmlab.com/mmaction/v1.0/recognition/uniformerv2/kinetics710/uniformerv2-base-p16-res224_clip-pre_u8_kinetics710-rgb_20221219-77d34f81.pth',  # noqa: E501
-            prefix='cls_head.')),
+        average_clips='prob'),
     data_preprocessor=dict(
         type='ActionDataPreprocessor',
         mean=[114.75, 114.75, 114.75],
@@ -130,7 +118,7 @@ val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
 # ── Optimizer ──────────────────────────────────────────────────────────────
-base_lr = 2e-6
+base_lr = 1e-5
 optim_wrapper = dict(
     optimizer=dict(
         type='AdamW', lr=base_lr, betas=(0.9, 0.999), weight_decay=0.05),

@@ -1,7 +1,7 @@
 _base_ = ['../../_base_/default_runtime.py']
 
-# model settings
-num_frames = 8
+# ── Model ──────────────────────────────────────────────────────────────────
+num_frames = 16
 model = dict(
     type='Recognizer3D',
     backbone=dict(
@@ -24,25 +24,13 @@ model = dict(
         mlp_factor=4.,
         drop_path_rate=0.,
         mlp_dropout=[0.5, 0.5, 0.5, 0.5],
-        clip_pretrained=False,
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint=  # noqa: E251
-            'https://download.openmmlab.com/mmaction/v1.0/recognition/uniformerv2/kinetics710/uniformerv2-base-p16-res224_clip-pre_u8_kinetics710-rgb_20221219-77d34f81.pth',  # noqa: E501
-            prefix='backbone.')),
+        clip_pretrained=False),
     cls_head=dict(
         type='UniFormerHead',
         dropout_ratio=0.5,
-        num_classes=600,
+        num_classes=100,
         in_channels=768,
-        average_clips='prob',
-        channel_map=  # noqa: E251
-        'configs/recognition/uniformerv2/k710_channel_map/map_k600.json',
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint=  # noqa: E251
-            'https://download.openmmlab.com/mmaction/v1.0/recognition/uniformerv2/kinetics710/uniformerv2-base-p16-res224_clip-pre_u8_kinetics710-rgb_20221219-77d34f81.pth',  # noqa: E501
-            prefix='cls_head.')),
+        average_clips='prob'),
     data_preprocessor=dict(
         type='ActionDataPreprocessor',
         mean=[114.75, 114.75, 114.75],
