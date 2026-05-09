@@ -24,6 +24,7 @@ cd $wdir
 
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
+
 CONFIG="./configs/SLR/bench_uniformer_small/uniformer_small_wlasl100_train64.py"
 RUN_DIR="/arf/scratch/zgokce/workdir/uniformer_small/wlasl100/train_64"
 REPORT_DIR="/arf/scratch/zgokce/workdir/uniformer_small/wlasl100/reports"
