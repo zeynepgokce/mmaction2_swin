@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J eval_uniformer_small_aslc100_tr64_lr1e-5_test64
+#SBATCH -J eval_us_aslc100_tr64_lr1e-5_test64
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -24,9 +24,10 @@ cd $wdir
 
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
+
 CONFIG="./configs/SLR/bench_uniformer_small/eval/uniformer_small_aslcitizen100_from_train64_lr1e-5_test64.py"
-TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/uniformer_small/aslcitizen100/train_64lr1e-5"
-EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_small/aslcitizen100/eval_from_train64lr1e-5_test64"
+TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/uniformer_small/aslcitizen100/train_64_lr1e-5"
+EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_small/aslcitizen100/eval_from_train64_lr1e-5_test64"
 REPORT_DIR="/arf/scratch/zgokce/workdir/uniformer_small/aslcitizen100/reports"
 
 mkdir -p "$EVAL_DIR" "$REPORT_DIR" /arf/scratch/zgokce/logs/uniformer_small
@@ -45,7 +46,7 @@ srun python ./tools/test.py "$CONFIG" "$CKPT_PATH" \
 srun python ./tools/bench_report.py \
   --model uniformer_small \
   --dataset aslcitizen100 \
-  --train_res 64lr1e-5 \
+  --train_res 64_lr1e-5 \
   --test_type 64 \
   --config "$CONFIG" \
   --ckpt "$CKPT_PATH" \

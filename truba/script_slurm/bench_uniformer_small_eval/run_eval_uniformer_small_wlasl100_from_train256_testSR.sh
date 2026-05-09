@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p barbun-cuda
 #SBATCH -A zgokce
-#SBATCH -J eval_uniformer_small_wlasl_tr256_testSR
+#SBATCH -J eval_us_wlasl_tr256_testSR
 #SBATCH --gres=gpu:1
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -24,6 +24,7 @@ cd $wdir
 
 export PYTHONPATH=/arf/home/zgokce/miniconda3/envs/open-mmlab/lib/python3.7/site-packages
 conda activate open-mmlab
+
 CONFIG="./configs/SLR/bench_uniformer_small/eval/uniformer_small_wlasl100_from_train256_testSR.py"
 TRAIN_WORKDIR="/arf/scratch/zgokce/workdir/uniformer_small/wlasl100/train_256"
 EVAL_DIR="/arf/scratch/zgokce/workdir/uniformer_small/wlasl100/eval_from_train256_testSR"
