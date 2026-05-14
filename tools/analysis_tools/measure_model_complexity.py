@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 # One representative config per model family (wlasl100 train256, 100 classes).
 # num_frames is read from each config automatically.
 _BASE = "/home/zeynep/Thesis/code/mmaction2/configs/SLR"
-_BASE = "/arf/home/zgokce/code/mmaction2/configs/SLR"
+#_BASE = "/arf/home/zgokce/code/mmaction2/configs/SLR"
 
 MODELS = [
     # (display_name, config_relative_path)

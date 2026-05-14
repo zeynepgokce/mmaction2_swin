@@ -1,0 +1,10 @@
+model,params,params_human,size_mb,flops,avg_latency_ms,p50_latency_ms,num_frames,device
+Swin-T,27927370,27.93M,106.53,44.0G,40.29,40.18,16,cuda
+Swin-S,49585978,49.59M,189.16,83.1G,68.92,68.8,16,cuda
+Swin-B,87741484,87.74M,334.71,141.0G,101.79,101.83,16,cuda
+Swin-L,196492816,196.49M,749.56,ERR(OutOfMemoryError),177.67,177.7,16,cuda
+UniFormer-S,21246500,21.25M,81.05,41.8G,32.04,31.95,16,cuda
+UniFormer-B,49659300,49.66M,189.44,96.7G,72.52,72.44,16,cuda
+UniFormerV2-B,114321508,114.32M,436.1,296.5G,114.38,114.28,16,cuda
+UniFormerV2-L,353792100,353.79M,1349.61,ERR(OutOfMemoryError),240.67,241.03,8,cuda
+VideoMAEv2-S,21918436,21.92M,83.61,57.0G,30.21,30.17,16,cuda
